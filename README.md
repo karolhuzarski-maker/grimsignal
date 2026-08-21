@@ -38,6 +38,15 @@ Create a production build:
 npm run build
 ```
 
+## GitHub Pages
+
+Every push to the `main` branch automatically builds and publishes the website
+through the workflow in `.github/workflows/deploy-pages.yml`.
+
+The production address is:
+
+`https://karolhuzarski-maker.github.io/grimsignal/`
+
 ## Upload to GitHub
 
 1. Create a new empty repository on GitHub.
