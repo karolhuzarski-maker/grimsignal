@@ -248,7 +248,19 @@ footer { min-height:150px; padding:0 clamp(24px,5vw,92px); display:grid; grid-te
   .mobile-nav a { padding: 17px 0; border-bottom: 1px solid var(--line); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
   .mobile-nav .mobile-mission { margin-top: 10px; padding: 17px; border: 0; background: var(--red); color: white; text-align: center; }
   .hero { min-height:auto; padding:125px 20px 70px; gap:70px; }.hero h1 { font-size:clamp(45px,13.5vw,70px); }.hero-copy > p { font-size:15px; }.button { width:100%; }.sensor-view { height:285px; }.sensor-strip{grid-template-columns:repeat(2,1fr)}
-  .proof-strip { overflow:hidden; justify-content:flex-start; white-space:nowrap; min-height:56px; }.proof-strip span:nth-child(n+4){display:none}
+  .proof-strip {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    justify-content:stretch;
+    min-height:auto;
+    padding:18px 20px;
+    gap:14px 16px;
+    overflow:hidden;
+    white-space:normal;
+  }
+  .proof-strip span { line-height:1.4; }
+  .proof-strip span:nth-child(n+4) { display:inline; }
+  .proof-strip span:last-child { grid-column:1 / -1; }
   .section-pad { padding:80px 20px; }.intro-body { grid-template-columns:1fr; gap:28px; }.intro h2,.data-copy h2,.library h2,.why>h2,.method h2 { font-size:42px; }
   .offer-grid { grid-template-columns:1fr; }.offer-card { min-height:340px; }.offer-card h3{margin-top:62px}
   .passport-preview{height:220px}.passport-meta>div{grid-template-columns:.42fr 1fr}.passport-meta dd{line-height:1.4}
