@@ -3,31 +3,31 @@ import SiteHeader from "./site-header";
 const offers = [
   {
     index: "01",
-    title: "Custom capture missions",
-    text: "We stage and record the edge cases your perception stack is missing — to your sensor, scenario and annotation specification.",
-    tag: "BUILT TO SPEC",
+    title: "Custom multisensor capture",
+    text: "We stage and record the hard-to-source scenes you need — using the viewpoints, sensors, conditions and file specification defined in your brief.",
+    tag: "RECORDED TO BRIEF",
   },
   {
     index: "02",
-    title: "Licensable data packs",
+    title: "Licensable footage packs",
     text: "Rights-cleared RGB, thermal and responder-view sequences covering difficult human, terrain and emergency conditions.",
-    tag: "READY TO LICENSE",
+    tag: "CLEAR USAGE RIGHTS",
   },
   {
     index: "03",
-    title: "Evaluation missions",
-    text: "Unseen scenes, controlled ground truth and structured error reporting for independent model and sensor validation.",
-    tag: "BLIND TESTING",
+    title: "Scenario production",
+    text: "Controlled emergency, rescue and human-activity scenes produced with actors, props, locations and field-domain supervision.",
+    tag: "CONTROLLED CONDITIONS",
   },
 ];
 
 const useCases = [
-  "Casualty detection & localization",
-  "Search and rescue perception",
-  "Human detection in degraded visibility",
-  "Responder action recognition",
-  "Aerial–ground sensor fusion",
-  "Public-safety robotics evaluation",
+  "Model-training footage",
+  "Search and rescue scenes",
+  "Human activity in degraded visibility",
+  "Emergency response sequences",
+  "Aerial–ground multisensor footage",
+  "Robotics and computer vision R&D",
 ];
 
 const packs = [
@@ -66,14 +66,14 @@ export default function Home() {
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
           <div className="eyebrow"><span /> REAL-WORLD DATA / PHYSICAL AI</div>
-          <h1>Train for the scene<br />you can’t download.</h1>
+          <h1>Capture the scene<br />you can’t download.</h1>
           <p>
-            Rights-cleared, synchronized RGB, thermal and ground-level data for
-            computer vision, autonomous systems and mission-critical AI.
+            Rights-cleared, synchronized RGB, thermal, aerial, ground and
+            responder-view footage for AI teams, robotics developers and R&amp;D.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#contact">Request a pilot capture <Arrow /></a>
-            <a className="button button-ghost" href="#data">Inspect the data model</a>
+            <a className="button button-primary" href="#contact">Commission a capture <Arrow /></a>
+            <a className="button button-ghost" href="#data">Explore footage formats</a>
           </div>
         </div>
 
@@ -120,12 +120,12 @@ export default function Home() {
       <section className="intro section-pad" id="capabilities">
         <div className="section-kicker">THE GAP</div>
         <div className="intro-body">
-          <h2>Rare events create<br />expensive blind spots.</h2>
+          <h2>Rare scenes are<br />hard to source.</h2>
           <p>
-            Open datasets cover the ordinary. We capture the operational edge:
+            Stock libraries cover the ordinary. We record the operational edge:
             people on the ground, partial occlusion, smoke, low light, difficult
             terrain and coordinated response — with the metadata and provenance
-            needed for serious R&amp;D.
+            needed for commercial AI, robotics and R&amp;D use.
           </p>
         </div>
       </section>
@@ -143,12 +143,12 @@ export default function Home() {
 
       <section className="data-section section-pad" id="data">
         <div className="data-copy">
-          <div className="section-kicker light">DATA ARCHITECTURE</div>
-          <h2>One event.<br />Every useful signal.</h2>
+          <div className="section-kicker light">FOOTAGE PACKAGE</div>
+          <h2>One scene.<br />Every useful angle.</h2>
           <p>
-            Each mission is designed as a structured data product — not a folder
-            of footage. Sensor files, labels, scenario truth and licensing travel
-            together in a documented Dataset Passport.
+            Each production is delivered as an organized footage package — not
+            an anonymous folder of clips. Camera files, synchronization records,
+            scene notes and usage rights travel together in a Capture Manifest.
           </p>
           <ul className="use-list">
             {useCases.map((item, index) => (
@@ -159,23 +159,21 @@ export default function Home() {
 
         <div className="passport">
           <div className="passport-head">
-            <div><small>GSL DATASET PASSPORT</small><strong>MCI / EDGE 01</strong></div>
+            <div><small>GSL CAPTURE MANIFEST</small><strong>MCI / MULTIVIEW 01</strong></div>
             <span>v1.0</span>
           </div>
           <div className="passport-preview">
             <div className="heat heat-a" />
             <div className="heat heat-b" />
             <div className="heat heat-c" />
-            <div className="box box-a"><span>CASUALTY_02</span></div>
-            <div className="box box-b"><span>RESPONDER_01</span></div>
             <span className="thermal-label">THERMAL / PALETTE: WHITE HOT</span>
           </div>
           <dl className="passport-meta">
             <div><dt>Streams</dt><dd>RGB / LWIR / POV / GROUND</dd></div>
-            <div><dt>Annotations</dt><dd>BBOX / MASK / TRACK / EVENT</dd></div>
-            <div><dt>Ground truth</dt><dd>POSITION / STATE / ACTION / TIME</dd></div>
-            <div><dt>Delivery</dt><dd>RAW + COCO / YOLO / JSON</dd></div>
-            <div><dt>Provenance</dt><dd>CONSENTED / LICENSED / DOCUMENTED</dd></div>
+            <div><dt>Recording</dt><dd>4K VIDEO / RADIOMETRIC THERMAL</dd></div>
+            <div><dt>Scene record</dt><dd>TAKE / ACTION / CAMERA / TIMECODE</dd></div>
+            <div><dt>Delivery</dt><dd>RAW / MASTER / PROXY / SELECTS</dd></div>
+            <div><dt>Usage rights</dt><dd>CONSENTED / LICENSED / DOCUMENTED</dd></div>
           </dl>
           <div className="passport-foot"><span>SCENARIO HASH</span><code>GS1-EU-MCI-8F31</code></div>
         </div>
@@ -187,7 +185,7 @@ export default function Home() {
             <div className="section-kicker">MISSION LIBRARY</div>
             <h2>Built around the hard parts.</h2>
           </div>
-          <p>Starting collections for perception training, model evaluation and sensor benchmarking.</p>
+          <p>Starting collections for commercial licensing, model training, product demonstrations and R&amp;D.</p>
         </div>
         <div className="pack-list">
           {packs.map((pack) => (
@@ -203,7 +201,7 @@ export default function Home() {
 
       <section className="why section-pad">
         <div className="section-kicker light">WHY GRIM SIGNAL LABS</div>
-        <h2>Field reality, translated<br />into machine-readable truth.</h2>
+        <h2>Field reality, captured<br />from every useful viewpoint.</h2>
         <div className="why-grid">
           <article>
             <span>01</span>
@@ -213,7 +211,7 @@ export default function Home() {
           <article>
             <span>02</span>
             <h3>Controlled complexity</h3>
-            <p>We vary visibility, posture, movement, occlusion and response actions without losing ground truth.</p>
+            <p>We control visibility, posture, movement, occlusion and response actions while preserving a clear production record.</p>
           </article>
           <article>
             <span>03</span>
@@ -226,25 +224,25 @@ export default function Home() {
       <section className="method section-pad" id="method">
         <div className="method-title">
           <div className="section-kicker">MISSION WORKFLOW</div>
-          <h2>From model gap<br />to field data.</h2>
+          <h2>From capture brief<br />to licensed footage.</h2>
         </div>
         <ol>
-          <li><span>01</span><div><strong>Define</strong><p>Failure mode, sensors, conditions and output schema.</p></div></li>
-          <li><span>02</span><div><strong>Stage</strong><p>Rights-cleared scene, actors, props and measurable truth.</p></div></li>
+          <li><span>01</span><div><strong>Brief</strong><p>Required scene, viewpoints, sensors, conditions and intended usage.</p></div></li>
+          <li><span>02</span><div><strong>Stage</strong><p>Rights-cleared location, actors, actions, props and shot plan.</p></div></li>
           <li><span>03</span><div><strong>Capture</strong><p>Synchronized aerial, thermal, ground and responder views.</p></div></li>
-          <li><span>04</span><div><strong>Deliver</strong><p>Validated files, annotations, data card and commercial license.</p></div></li>
+          <li><span>04</span><div><strong>Deliver</strong><p>Organized files, synchronization sheet, Capture Manifest and commercial license.</p></div></li>
         </ol>
       </section>
 
       <section className="contact section-pad" id="contact">
         <div className="contact-signal" aria-hidden="true"><span /></div>
         <div className="section-kicker light">START WITH A PILOT</div>
-        <h2>Show us what your model<br />fails to see.</h2>
+        <h2>Tell us the scene<br />you need to capture.</h2>
         <p>
-          Send us the missing scenario, target sensor and required labels. We’ll
-          turn it into a focused capture brief.
+          Send us the scenario, required viewpoints, sensor format and intended
+          usage. We’ll turn it into a focused production brief.
         </p>
-        <a className="button button-light" href="#contact-details">Prepare a mission brief <Arrow /></a>
+        <a className="button button-light" href="#contact-details">Prepare a capture brief <Arrow /></a>
         <div className="contact-details" id="contact-details">
           <span>KRAKÓW, POLAND / EU FIELD CAPTURE</span>
           <span>CONTACT CHANNEL TO BE ADDED BEFORE PUBLIC LAUNCH</span>
