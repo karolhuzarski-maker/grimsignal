@@ -32,7 +32,7 @@ export default function SiteHeader() {
       </nav>
 
       <a className="header-cta" href="#contact">
-        Start a capture <span aria-hidden="true">↗</span>
+        Start a mission <span aria-hidden="true">↗</span>
       </a>
 
       <button
@@ -55,7 +55,7 @@ export default function SiteHeader() {
         {links.map((link) => (
           <a key={link.href} href={link.href} onClick={closeMenu}>{link.label}</a>
         ))}
-        <a className="mobile-mission" href="#contact" onClick={closeMenu}>Start a capture ↗</a>
+        <a className="mobile-mission" href="#contact" onClick={closeMenu}>Start a mission ↗</a>
       </nav>
     </header>
   );
