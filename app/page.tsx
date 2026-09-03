@@ -1,4 +1,5 @@
 import SiteHeader from "./site-header";
+import DroneVisual from "./drone-visual";
 
 const offers = [
   {
@@ -86,11 +87,12 @@ export default function Home() {
             <div className="terrain terrain-one" />
             <div className="terrain terrain-two" />
             <div className="terrain terrain-three" />
+            <DroneVisual />
             <span className="target target-one"><i>01</i></span>
             <span className="target target-two"><i>02</i></span>
             <span className="target target-three"><i>03</i></span>
             <div className="crosshair"><span /><i /></div>
-            <div className="view-label">AERIAL RGB / 4K</div>
+            <div className="view-label">AERIAL RGB / UAV MULTISENSOR NODE</div>
             <div className="timecode">TC 00:14:27:08</div>
           </div>
           <div className="sensor-strip">
@@ -106,7 +108,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-index">01 — SIGNAL ACQUISITION</div>
+        <div className="hero-index">01 — UAV / SIGNAL ACQUISITION</div>
       </section>
 
       <section className="proof-strip" aria-label="Core standards">
