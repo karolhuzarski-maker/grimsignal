@@ -5,25 +5,24 @@ import { fileURLToPath } from "node:url";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(scriptDirectory, "..");
-const sourcePath = path.join(projectRoot, "app", "hero-drone-image.ts");
+const partsDirectory = path.join(projectRoot, "app", "hero-image-parts");
 const outputPath = path.join(projectRoot, "public", "grim-uav-hero.webp");
 
-const source = await readFile(sourcePath, "utf8");
-const marker = "data:image/webp;base64,";
-const markerIndex = source.indexOf(marker);
+const partNames = [
+  "p00.b64.txt",
+  "p01.b64.txt",
+  "p02.b64.txt",
+  "p03.b64.txt",
+  "p04-correct.b64.txt",
+  "p05.b64.txt",
+  "p06.b64.txt",
+];
 
-if (markerIndex === -1) {
-  throw new Error("Hero image base64 marker was not found in app/hero-drone-image.ts");
-}
+const chunks = await Promise.all(
+  partNames.map(async (name) => (await readFile(path.join(partsDirectory, name), "utf8")).replace(/\s+/g, "")),
+);
 
-const payloadStart = markerIndex + marker.length;
-const payloadEnd = source.indexOf('"', payloadStart);
-
-if (payloadEnd === -1) {
-  throw new Error("Hero image base64 payload terminator was not found in app/hero-drone-image.ts");
-}
-
-const payload = source.slice(payloadStart, payloadEnd).replace(/\s+/g, "");
+const payload = chunks.join("");
 const bytes = Buffer.from(payload, "base64");
 const digest = createHash("sha256").update(bytes).digest("hex");
 const expectedBytes = 33874;
@@ -41,4 +40,4 @@ if (bytes.subarray(0, 4).toString("ascii") !== "RIFF" || bytes.subarray(8, 12).t
 
 await mkdir(path.dirname(outputPath), { recursive: true });
 await writeFile(outputPath, bytes);
-console.log(`Materialized verified hero asset: ${path.relative(projectRoot, outputPath)} (${bytes.length} bytes)`);
+console.log(`Materialized verified hero asset: ${path.relative(projectRoot, outputPath)} (${bytes.length} bytes, sha256 ${digest})`);
