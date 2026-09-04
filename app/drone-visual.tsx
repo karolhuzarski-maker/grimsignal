@@ -1,10 +1,9 @@
-import { HERO_DRONE_IMAGE } from "./hero-drone-image";
 import styles from "./drone-visual.module.css";
 
 export default function DroneVisual() {
   return (
     <div className={styles.frame} aria-hidden="true">
-      <img className={styles.image} src={HERO_DRONE_IMAGE} alt="" />
+      <img className={styles.image} src="/grim-uav-hero.webp" alt="" />
       <div className={styles.shade} />
 
       <div className={styles.topbar}>
