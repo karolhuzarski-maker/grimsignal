@@ -78,34 +78,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="sensor-stage" aria-label="Illustration of synchronized multisensor capture">
-          <div className="stage-topline">
-            <span>MISSION / GSL-MCI-01</span>
-            <span className="live"><i /> CAPTURE READY</span>
-          </div>
-          <div className="sensor-view">
-            <div className="terrain terrain-one" />
-            <div className="terrain terrain-two" />
-            <div className="terrain terrain-three" />
-            <DroneVisual />
-            <span className="target target-one"><i>01</i></span>
-            <span className="target target-two"><i>02</i></span>
-            <span className="target target-three"><i>03</i></span>
-            <div className="crosshair"><span /><i /></div>
-            <div className="view-label">AERIAL RGB / UAV MULTISENSOR NODE</div>
-            <div className="timecode">TC 00:14:27:08</div>
-          </div>
-          <div className="sensor-strip">
-            <div className="sensor-chip active"><span>RGB</span><strong>4K / 25</strong></div>
-            <div className="sensor-chip thermal"><span>THERMAL</span><strong>R-JPEG</strong></div>
-            <div className="sensor-chip"><span>GROUND</span><strong>4K / 50</strong></div>
-            <div className="sensor-chip"><span>POV</span><strong>4K / 50</strong></div>
-          </div>
-          <div className="sync-line">
-            <span>4 STREAMS SYNCHRONIZED</span>
-            <div><i /><i /><i /><i /><i /><i /></div>
-            <strong>Δ 12 ms</strong>
-          </div>
+        <div className="sensor-stage" aria-label="Hero graphic showing a multisensor UAV and synchronized capture streams">
+          <DroneVisual />
         </div>
 
         <div className="hero-index">01 — UAV / SIGNAL ACQUISITION</div>
