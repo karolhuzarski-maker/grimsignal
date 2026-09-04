@@ -18,6 +18,9 @@ if [[ ! -x "${vinext}" ]]; then
   exit 69
 fi
 
+echo "Materializing verified UAV hero asset..."
+node "${script_dir}/materialize-hero.mjs"
+
 echo "Running bounded vinext build..."
 timeout \
   --signal=TERM \
