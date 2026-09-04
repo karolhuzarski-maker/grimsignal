@@ -1,0 +1,140 @@
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1448 / 950;
+  overflow: hidden;
+  background: #070a0d;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(5,8,10,.10) 0%, rgba(5,8,10,.01) 50%, rgba(5,8,10,.28) 100%);
+}
+
+.topbar {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 8px;
+  line-height: 1.25;
+  letter-spacing: .16em;
+  color: rgba(255,255,255,.66);
+  text-transform: uppercase;
+}
+
+.ready {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  white-space: nowrap;
+  color: rgba(255,255,255,.90);
+}
+
+.dot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c5222e;
+  box-shadow: 0 0 0 5px rgba(197,34,46,.14);
+}
+
+.badge {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  max-width: calc(100% - 32px);
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(5,8,10,.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255,255,255,.80);
+  font-size: 8px;
+  line-height: 1.35;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  display: grid;
+  gap: 6px;
+}
+
+.badgeLabel {
+  color: #dd4a54;
+}
+
+.badge strong {
+  font-size: 10px;
+  line-height: 1.35;
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .frame {
+    aspect-ratio: 1448 / 950;
+    min-height: 0;
+  }
+
+  .topbar {
+    top: 11px;
+    left: 12px;
+    right: 12px;
+    gap: 10px;
+    font-size: 6.5px;
+    letter-spacing: .13em;
+  }
+
+  .ready {
+    gap: 6px;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    box-shadow: 0 0 0 4px rgba(197,34,46,.13);
+  }
+
+  .badge {
+    right: 10px;
+    bottom: 10px;
+    max-width: 72%;
+    padding: 8px 9px;
+    gap: 4px;
+    font-size: 6.5px;
+    letter-spacing: .13em;
+  }
+
+  .badge strong {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .topbar {
+    font-size: 6px;
+  }
+
+  .badge {
+    max-width: 76%;
+    font-size: 6px;
+  }
+
+  .badge strong {
+    font-size: 7.5px;
+  }
+}
