@@ -9,13 +9,22 @@ const sourcePath = path.join(projectRoot, "app", "hero-drone-image.ts");
 const outputPath = path.join(projectRoot, "public", "grim-uav-hero.webp");
 
 const source = await readFile(sourcePath, "utf8");
-const match = source.match(/data:image\/webp;base64,([A-Za-z0-9+/=]+)"/);
+const marker = "data:image/webp;base64,";
+const markerIndex = source.indexOf(marker);
 
-if (!match) {
-  throw new Error("Hero image base64 payload was not found in app/hero-drone-image.ts");
+if (markerIndex === -1) {
+  throw new Error("Hero image base64 marker was not found in app/hero-drone-image.ts");
 }
 
-const bytes = Buffer.from(match[1], "base64");
+const payloadStart = markerIndex + marker.length;
+const payloadEnd = source.indexOf('"', payloadStart);
+
+if (payloadEnd === -1) {
+  throw new Error("Hero image base64 payload terminator was not found in app/hero-drone-image.ts");
+}
+
+const payload = source.slice(payloadStart, payloadEnd).replace(/\s+/g, "");
+const bytes = Buffer.from(payload, "base64");
 const digest = createHash("sha256").update(bytes).digest("hex");
 const expectedBytes = 33874;
 const expectedDigest = "dfaaabdc1fcbb3dddb6b1d4c966ca4437e739976d52b3123dccc334ac1fb1a48";
