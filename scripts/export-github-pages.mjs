@@ -53,6 +53,7 @@ html = html
   .replaceAll("https://grim-signal-labs.karhuz.chatgpt.site", productionUrl)
   .replaceAll('src="/grim-signal-labs-logo.png"', 'src="./grim-signal-labs-logo.png"')
   .replaceAll('href="/grim-signal-labs-logo.png"', 'href="./grim-signal-labs-logo.png"')
+  .replaceAll('src="/grim-uav-hero.webp"', 'src="./grim-uav-hero.webp"')
   .replace(
     "</head>",
     '<link rel="stylesheet" href="./styles.css"/><link rel="icon" href="./favicon.svg"/></head>',
@@ -72,7 +73,7 @@ await cp(
   path.join(outputDirectory, "styles.css"),
 );
 
-for (const asset of ["grim-signal-labs-logo.png", "og.png", "favicon.svg"]) {
+for (const asset of ["grim-signal-labs-logo.png", "grim-uav-hero.webp", "og.png", "favicon.svg"]) {
   await cp(path.join(publicDirectory, asset), path.join(outputDirectory, asset));
 }
 
