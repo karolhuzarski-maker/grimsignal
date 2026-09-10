@@ -1,5 +1,6 @@
 import SiteHeader from "./site-header";
 import DroneVisual from "./drone-visual";
+import ContactBrief from "./contact-brief";
 
 const offers = [
   {
@@ -242,33 +243,28 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="contact section-pad" id="contact">
-        <div className="contact-signal" aria-hidden="true"><span /></div>
-        <div className="section-kicker light">START WITH A PILOT</div>
-        <h2>Tell us the scene<br />you need to capture.</h2>
-        <p>
-          Send us the scenario, required viewpoints, sensor format and intended
-          usage. We’ll turn it into a focused production brief.
-        </p>
-        <a className="button button-light" href="#contact-details">Prepare a capture brief <Arrow /></a>
-        <div className="contact-details" id="contact-details">
-          <span>KRAKÓW, POLAND / EU FIELD CAPTURE</span>
-          <span>CONTACT CHANNEL TO BE ADDED BEFORE PUBLIC LAUNCH</span>
-        </div>
-      </section>
+      <ContactBrief />
 
       <footer>
-        <a className="brand footer-brand" href="#top">
-          <img
-            className="brand-logo"
-            src="/grim-signal-labs-logo.png"
-            alt="GRIM SIGNAL LABS"
-            width="1741"
-            height="412"
-          />
-        </a>
-        <p>REAL-WORLD MULTIMODAL DATA FOR PHYSICAL AI.</p>
-        <span>© 2026 GRIM SIGNAL LABS</span>
+        <div className="footer-identity">
+          <a className="brand footer-brand" href="#top">
+            <img
+              className="brand-logo"
+              src="/grim-signal-labs-logo.png"
+              alt="GRIM SIGNAL LABS"
+              width="1741"
+              height="412"
+            />
+          </a>
+          <p>REAL-WORLD MULTIMODAL DATA FOR PHYSICAL AI.</p>
+        </div>
+        <div className="footer-legal">
+          <a href="mailto:echo@grimsignallabs.com">ECHO@GRIMSIGNALLABS.COM</a>
+          <span>OPERATED BY H-CORE EDU</span>
+          <span>VAT ID: PL6922069523</span>
+          <span>KRAKÓW, POLAND / EU</span>
+          <span>© 2026 GRIM SIGNAL LABS</span>
+        </div>
       </footer>
     </main>
   );
