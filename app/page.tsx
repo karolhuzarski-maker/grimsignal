@@ -54,6 +54,16 @@ const packs = [
   },
 ];
 
+const researchAreas = [
+  "Crisis AI validation",
+  "RGB / thermal multimodal research",
+  "AI performance degradation",
+  "Human detection in degraded environments",
+  "UAV and ground sensor fusion",
+  "Real-world benchmarking",
+  "Physical AI for SAR and disaster response",
+];
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -208,6 +218,28 @@ export default function Home() {
           <li><span>03</span><div><strong>Capture</strong><p>Synchronized aerial, thermal, ground and responder views.</p></div></li>
           <li><span>04</span><div><strong>Deliver</strong><p>Organized files, synchronization sheet, Capture Manifest and commercial license.</p></div></li>
         </ol>
+      </section>
+
+      <section className="research section-pad" id="research">
+        <div className="research-copy">
+          <div className="section-kicker light">REAL-WORLD VALIDATION FOR PHYSICAL AI</div>
+          <h2>Research &amp; Development</h2>
+          <p>
+            GRIM SIGNAL LABS develops and tests methods for evaluating AI systems
+            in realistic crisis environments. Our R&amp;D focuses on multimodal RGB
+            and thermal data, degraded visual conditions, UAV and ground-based
+            sensing, real-world benchmarking and AI performance under operational
+            stress.
+          </p>
+        </div>
+        <ul className="research-list">
+          {researchAreas.map((area, index) => (
+            <li key={area}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {area}
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="contact section-pad" id="contact">
