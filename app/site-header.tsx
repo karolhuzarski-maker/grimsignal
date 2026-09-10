@@ -6,6 +6,7 @@ const links = [
   { href: "#capabilities", label: "Capabilities" },
   { href: "#data", label: "Data" },
   { href: "#method", label: "Method" },
+  { href: "#research", label: "R&D" },
 ];
 
 export default function SiteHeader() {
@@ -27,7 +28,7 @@ export default function SiteHeader() {
 
       <nav className="desktop-nav" aria-label="Primary navigation">
         {links.map((link) => (
-          <a key={link.href} href={link.href}>{link.label}</a>
+          <a className={link.href === "#research" ? "rd-link" : undefined} key={link.href} href={link.href}>{link.label}</a>
         ))}
       </nav>
 
