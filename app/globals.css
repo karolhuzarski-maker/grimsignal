@@ -41,9 +41,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .brand { display: inline-flex; align-items: center; width: max-content; }
 .brand-logo { display: block; width: 330px; height: auto; }
-.desktop-nav { display: flex; gap: 36px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
+.desktop-nav { display: flex; gap: 36px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; position: relative; }
 .desktop-nav a { opacity: .62; transition: opacity .2s ease; }
 .desktop-nav a:hover { opacity: 1; }
+.desktop-nav .rd-link { position: absolute; left: calc(100% + 36px); white-space: nowrap; }
 .header-cta { justify-self: end; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; display: flex; gap: 12px; align-items: center; }
 .header-cta span { color: var(--red); font-size: 16px; }
 .menu-toggle, .mobile-nav { display: none; }
@@ -192,6 +193,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .method li { padding:24px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:70px 1fr; }
 .method li > span { color:var(--red); font-size:9px; }.method li div { display:grid; grid-template-columns:.42fr 1fr; gap:30px; }.method strong { text-transform:uppercase; font-size:18px; }.method p { margin:0; color:var(--muted); font-size:13px; line-height:1.55; }
 
+.research { background:var(--ink-2); color:white; display:grid; grid-template-columns:.75fr 1fr; gap:clamp(60px,9vw,150px); align-items:start; }
+.research h2 { margin:22px 0 30px; text-transform:uppercase; font-size:clamp(42px,5vw,76px); letter-spacing:-.045em; line-height:.96; font-weight:900; }
+.research-copy > p { margin:0; max-width:620px; color:rgba(255,255,255,.56); font-size:16px; line-height:1.75; }
+.research-list { list-style:none; padding:0; margin:0; border-top:1px solid rgba(255,255,255,.13); }
+.research-list li { padding:19px 0; border-bottom:1px solid rgba(255,255,255,.13); display:grid; grid-template-columns:70px 1fr; gap:20px; text-transform:uppercase; font-size:11px; letter-spacing:.08em; }
+.research-list li span { color:#dd4a54; font-size:8px; }
+
 .contact { position:relative; overflow:hidden; background:var(--red); color:white; min-height:620px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; }
 .contact .section-kicker { color:rgba(255,255,255,.6); }.contact h2 { margin-top:24px; font-size:clamp(50px,6.6vw,102px); position:relative; z-index:2; }.contact > p { color:rgba(255,255,255,.7); max-width:590px; margin-top:28px; position:relative; z-index:2; }
 .button-light { background:white; color:var(--ink); margin-top:36px; position:relative; z-index:2; }
@@ -207,6 +215,7 @@ footer { min-height:150px; padding:0 clamp(24px,5vw,92px); display:grid; grid-te
   .hero { grid-template-columns:1fr; padding-top:150px; }.hero-copy { max-width:800px; }.sensor-stage { max-width:700px; }.hero::after{display:none}
   .intro { grid-template-columns:1fr; gap:40px; }.intro-body { grid-template-columns:1fr .7fr; }
   .data-section { grid-template-columns:1fr; }.passport{max-width:720px}.method{grid-template-columns:1fr;gap:60px}
+  .research { grid-template-columns:1fr; }
 }
 
 @media (max-width: 860px) {
@@ -267,6 +276,7 @@ footer { min-height:150px; padding:0 clamp(24px,5vw,92px); display:grid; grid-te
   .library-head { grid-template-columns:1fr; gap:28px; margin-bottom:50px; }.pack-row { grid-template-columns:50px 1fr auto; gap:12px; padding:20px 0; }.pack-row p { grid-column:2/4; margin:0 }.pack-row:hover{padding:20px 10px}
   .why-grid { grid-template-columns:1fr; }.why-grid article{min-height:240px}.why-grid h3{margin-top:55px}
   .method li { grid-template-columns:45px 1fr; }.method li div { grid-template-columns:1fr; gap:10px; }
+  .research h2 { font-size:42px; }.research-list li { grid-template-columns:45px 1fr; }
   .contact { min-height:650px; }.contact h2{font-size:49px}.contact-details{flex-direction:column}.contact-signal{opacity:.5;right:-350px}
   footer { grid-template-columns:1fr; gap:18px; padding:38px 20px; }.footer-brand{justify-self:center}.footer-brand .brand-logo{width:260px}footer p,footer>span{text-align:center;margin:0}
 }
