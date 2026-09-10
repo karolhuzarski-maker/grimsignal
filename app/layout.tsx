@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description:
     "Rights-cleared RGB, thermal, aerial, ground and responder-view footage for computer vision, robotics and R&D.",
   icons: {
-    icon: "/grim-signal-labs-logo.png",
-    shortcut: "/grim-signal-labs-logo.png",
+    icon: [{ url: "/favicon.svg?v=2", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg?v=2",
   },
   openGraph: {
     title: "GRIM SIGNAL LABS — Capture the scene you can’t download.",

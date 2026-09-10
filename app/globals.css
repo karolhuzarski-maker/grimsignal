@@ -45,8 +45,23 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .desktop-nav a { opacity: .62; transition: opacity .2s ease; }
 .desktop-nav a:hover { opacity: 1; }
 .desktop-nav .rd-link { position: absolute; left: calc(100% + 36px); white-space: nowrap; }
-.header-cta { justify-self: end; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; display: flex; gap: 12px; align-items: center; }
-.header-cta span { color: var(--red); font-size: 16px; }
+.header-cta {
+  justify-self: end;
+  min-height: 42px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--red);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  transition: background .2s ease;
+}
+.header-cta:hover { background: #a91c27; }
+.header-cta span { color: currentColor; font-size: 16px; }
 .menu-toggle, .mobile-nav { display: none; }
 
 .hero {
