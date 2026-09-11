@@ -38,19 +38,40 @@ function hideBrief() {
   briefPanel.classList.remove("is-open");
 }
 
+function positionBrief() {
+  if (!briefPanel) return;
+  const topOffset = window.innerWidth <= 760 ? 70 : 76;
+  const top = briefPanel.getBoundingClientRect().top + window.scrollY - topOffset;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
 briefLinks.forEach((link) => {
-  link.addEventListener("click", () => showBrief());
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showBrief();
+
+    if (window.location.hash !== "#capture-brief") {
+      window.history.pushState(null, "", "#capture-brief");
+    }
+
+    window.requestAnimationFrame(() => positionBrief());
+  });
 });
 
 closeBriefLink?.addEventListener("click", () => hideBrief());
 
 if (window.location.hash === "#capture-brief") {
   showBrief();
+  window.setTimeout(() => positionBrief(), 0);
 }
 
 window.addEventListener("hashchange", () => {
-  if (window.location.hash === "#capture-brief") showBrief();
-  else hideBrief();
+  if (window.location.hash === "#capture-brief") {
+    showBrief();
+    window.requestAnimationFrame(() => positionBrief());
+  } else {
+    hideBrief();
+  }
 });
 
 function setBriefStatus(state, text) {
