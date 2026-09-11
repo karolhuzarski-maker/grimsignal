@@ -10,6 +10,8 @@ const WEB3FORMS_ACCESS_KEY = [
   "d7e6b2aef86c",
 ].join("-");
 
+type SubmitState = "idle" | "sending" | "success" | "error";
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -18,6 +20,7 @@ export default function ContactBrief() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   function revealBrief() {
     setIsOpen(true);
@@ -27,15 +30,6 @@ export default function ContactBrief() {
         block: "start",
       });
     }, 30);
-  }
-
-  function keepBriefVisible() {
-    window.requestAnimationFrame(() => {
-      document.getElementById("capture-brief")?.scrollIntoView({
-        behavior: "auto",
-        block: "start",
-      });
-    });
   }
 
   useEffect(() => {
@@ -73,6 +67,7 @@ export default function ContactBrief() {
   function closeBrief() {
     setIsOpen(false);
     setFeedback("");
+    setSubmitState("idle");
 
     if (window.location.hash === "#capture-brief") {
       window.history.replaceState(
@@ -105,34 +100,35 @@ export default function ContactBrief() {
     const emailControl = form.elements.namedItem("email") as HTMLInputElement;
 
     setFeedback("");
+    setSubmitState("idle");
 
     if (!message) {
       setFeedback("ADD A SHORT MESSAGE TO CONTINUE.");
+      setSubmitState("error");
       (form.elements.namedItem("message") as HTMLTextAreaElement).focus();
-      keepBriefVisible();
       return;
     }
 
     if (!email || !emailControl.checkValidity()) {
       setFeedback("ADD A VALID RETURN EMAIL.");
+      setSubmitState("error");
       emailControl.focus();
-      keepBriefVisible();
       return;
     }
 
     if (botcheck) {
       setFeedback("BRIEF RECEIVED. THANK YOU.");
+      setSubmitState("success");
       form.reset();
-      keepBriefVisible();
       return;
     }
 
     const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), 12000);
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
     setIsSubmitting(true);
+    setSubmitState("sending");
     setFeedback("SENDING BRIEF…");
-    keepBriefVisible();
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -160,20 +156,22 @@ export default function ContactBrief() {
       const result = await response.json().catch(() => null);
 
       if (!response.ok || !result?.success) {
-        throw new Error(result?.message || "Submission failed");
+        const serviceMessage = String(result?.message || "Submission failed").trim();
+        throw new Error(serviceMessage);
       }
 
       form.reset();
-      setFeedback("BRIEF RECEIVED. WE’LL GET BACK TO YOU BY EMAIL.");
-      keepBriefVisible();
+      setSubmitState("success");
+      setFeedback("BRIEF RECEIVED — SENT SUCCESSFULLY.");
     } catch (error) {
       const timedOut = error instanceof DOMException && error.name === "AbortError";
+      const messageText = error instanceof Error ? error.message : "Unknown error";
+      setSubmitState("error");
       setFeedback(
         timedOut
-          ? "SEND TIMED OUT. PLEASE TRY AGAIN."
-          : "COULDN’T SEND THE BRIEF. PLEASE TRY AGAIN OR EMAIL ECHO@GRIMSIGNALLABS.COM.",
+          ? "SEND TIMED OUT — PLEASE TRY AGAIN."
+          : `SEND FAILED — ${messageText}`,
       );
-      keepBriefVisible();
     } finally {
       window.clearTimeout(timeoutId);
       setIsSubmitting(false);
@@ -208,6 +206,36 @@ export default function ContactBrief() {
           cursor: wait;
           opacity: .68;
           transform: none;
+        }
+
+        .brief-feedback-box {
+          display: flex;
+          align-items: center;
+          min-height: 42px;
+          margin: 0 0 12px;
+          padding: 10px 12px;
+          border: 1px solid rgba(255,255,255,.18);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: .08em;
+          line-height: 1.35;
+          text-transform: uppercase;
+        }
+
+        .brief-feedback-box.is-idle {
+          visibility: hidden;
+        }
+
+        .brief-feedback-box.is-sending {
+          border-color: rgba(255,255,255,.42);
+        }
+
+        .brief-feedback-box.is-success {
+          border-color: rgba(255,255,255,.72);
+        }
+
+        .brief-feedback-box.is-error {
+          border-color: #d2212d;
         }
       `}</style>
 
@@ -346,13 +374,20 @@ export default function ContactBrief() {
                 </div>
               </details>
 
+              <p
+                className={`brief-feedback-box is-${submitState}`}
+                role="status"
+                aria-live="polite"
+              >
+                {feedback || "READY"}
+              </p>
+
               <button className="brief-submit" type="submit" disabled={isSubmitting}>
                 <span>{isSubmitting ? "SENDING BRIEF…" : "SEND CAPTURE BRIEF"}</span><Arrow />
               </button>
               <p className="brief-privacy">
                 Your brief is sent securely to GRIM SIGNAL LABS. We use it only to respond to your inquiry.
               </p>
-              <p className="brief-feedback" role="status" aria-live="polite">{feedback}</p>
             </div>
           </form>
         </div>
