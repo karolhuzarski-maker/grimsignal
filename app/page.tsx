@@ -84,7 +84,7 @@ export default function Home() {
             responder-view footage for AI teams, robotics developers and R&amp;D.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#contact">Commission a capture <Arrow /></a>
+            <a className="button button-primary" href="#capture-brief">Commission a capture <Arrow /></a>
             <a className="button button-ghost" href="#data">Explore footage formats</a>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function Home() {
             <div className="card-head"><span>{offer.index}</span><small>{offer.tag}</small></div>
             <h3>{offer.title}</h3>
             <p>{offer.text}</p>
-            <a href="#contact" aria-label={`Discuss ${offer.title}`}>Discuss a brief <Arrow /></a>
+            <a href="#capture-brief" aria-label={`Discuss ${offer.title}`}>Discuss a brief <Arrow /></a>
           </article>
         ))}
       </section>
