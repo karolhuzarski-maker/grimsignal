@@ -1,0 +1,108 @@
+/* Contact and company-data readability overrides */
+
+.contact-email-path > span {
+  color: rgba(255, 255, 255, .7);
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: .14em;
+}
+
+.contact-email-path a {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.contact-details {
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: .12em;
+  color: rgba(255, 255, 255, .82);
+}
+
+.footer-identity p {
+  font-size: 9px;
+  line-height: 1.55;
+  letter-spacing: .13em;
+  color: rgba(13, 17, 21, .62);
+}
+
+.footer-legal {
+  font-size: 9px;
+  line-height: 1.55;
+  letter-spacing: .11em;
+  color: rgba(13, 17, 21, .62);
+}
+
+.footer-legal a {
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .contact {
+    min-height: 710px;
+  }
+
+  .contact-actions {
+    width: 100%;
+  }
+
+  .contact-email-path {
+    gap: 9px;
+  }
+
+  .contact-email-path > span {
+    font-size: 9px;
+  }
+
+  .contact-email-path a {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-details {
+    gap: 8px;
+    font-size: 9px;
+    line-height: 1.5;
+    letter-spacing: .1em;
+  }
+
+  footer {
+    gap: 24px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .footer-identity p {
+    max-width: 280px;
+    font-size: 9px;
+  }
+
+  .footer-legal {
+    gap: 13px 24px;
+    font-size: 9px;
+    line-height: 1.55;
+  }
+
+  .footer-legal a {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 620px) {
+  .contact {
+    min-height: 740px;
+  }
+
+  .contact-email-path a {
+    font-size: 15px;
+  }
+
+  .contact-details {
+    font-size: 9px;
+  }
+
+  .footer-legal {
+    font-size: 9px;
+  }
+}
