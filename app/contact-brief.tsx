@@ -8,6 +8,7 @@ function Arrow() {
 
 export default function ContactBrief() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState("");
 
   function revealBrief() {
@@ -70,8 +71,10 @@ export default function ContactBrief() {
     });
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
+
     setFeedback("");
 
     const form = event.currentTarget;
@@ -80,6 +83,9 @@ export default function ContactBrief() {
     const email = String(data.get("email") ?? "").trim();
     const organization = String(data.get("organization") ?? "").trim();
     const reference = String(data.get("reference") ?? "").trim();
+    const honey = String(data.get("_honey") ?? "").trim();
+    const intent = String(data.get("intent") ?? "Not specified");
+    const timing = String(data.get("timing") ?? "Not specified");
     const emailControl = form.elements.namedItem("email") as HTMLInputElement;
 
     if (!message) {
@@ -94,26 +100,53 @@ export default function ContactBrief() {
       return;
     }
 
-    const signals = data.getAll("signals").join(", ") || "Not specified";
-    const subject = `Capture brief — ${organization || data.get("intent") || "new inquiry"}`;
-    const body = [
-      "GRIM SIGNAL LABS / QUICK CAPTURE BRIEF",
-      "",
-      `MESSAGE\n${message}`,
-      "",
-      `TOPIC\n${data.get("intent") || "Not specified"}`,
-      "",
-      `USEFUL SIGNALS\n${signals}`,
-      "",
-      `TARGET WINDOW\n${data.get("timing") || "Not specified"}`,
-      "",
-      `REFERENCE\n${reference || "Not provided"}`,
-      "",
-      `CONTACT\n${email}\n${organization || "Organization not provided"}`,
-    ].join("\n");
+    if (honey) {
+      setFeedback("BRIEF RECEIVED. THANK YOU.");
+      form.reset();
+      return;
+    }
 
-    window.location.href =
-      `mailto:echo@grimsignallabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const signals = data.getAll("signals").join(", ") || "Not specified";
+    const subject = `GRIM SIGNAL LABS — Capture brief — ${organization || intent}`;
+
+    setIsSubmitting(true);
+    setFeedback("SENDING BRIEF…");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/echo@grimsignallabs.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: "table",
+          _captcha: "false",
+          email,
+          organization: organization || "Not provided",
+          message,
+          topic: intent,
+          useful_signals: signals,
+          target_window: timing,
+          reference: reference || "Not provided",
+          source: "GRIM SIGNAL LABS website / capture brief",
+        }),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.success === "false" || result?.success === false) {
+        throw new Error("Submission failed");
+      }
+
+      form.reset();
+      setFeedback("BRIEF RECEIVED. WE’LL GET BACK TO YOU BY EMAIL.");
+    } catch {
+      setFeedback("COULDN’T SEND THE BRIEF. PLEASE TRY AGAIN OR EMAIL ECHO@GRIMSIGNALLABS.COM.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -126,6 +159,24 @@ export default function ContactBrief() {
         .contact-form-panel.is-open,
         .contact-form-panel:target {
           display: block;
+        }
+
+        .brief-honeypot {
+          position: absolute !important;
+          width: 1px !important;
+          height: 1px !important;
+          padding: 0 !important;
+          margin: -1px !important;
+          overflow: hidden !important;
+          clip: rect(0, 0, 0, 0) !important;
+          white-space: nowrap !important;
+          border: 0 !important;
+        }
+
+        .brief-submit:disabled {
+          cursor: wait;
+          opacity: .68;
+          transform: none;
         }
       `}</style>
 
@@ -192,6 +243,15 @@ export default function ContactBrief() {
           </header>
 
           <form className="quick-brief-form" onSubmit={handleSubmit} noValidate>
+            <input
+              className="brief-honeypot"
+              type="text"
+              name="_honey"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
             <div className="brief-main">
               <label className="brief-field brief-message">
                 <span>WHAT DO YOU NEED?</span>
@@ -255,11 +315,11 @@ export default function ContactBrief() {
                 </div>
               </details>
 
-              <button className="brief-submit" type="submit">
-                <span>CREATE EMAIL DRAFT</span><Arrow />
+              <button className="brief-submit" type="submit" disabled={isSubmitting}>
+                <span>{isSubmitting ? "SENDING BRIEF…" : "SEND CAPTURE BRIEF"}</span><Arrow />
               </button>
               <p className="brief-privacy">
-                Nothing is sent automatically. You review the email before sending.
+                Your brief is sent securely to GRIM SIGNAL LABS. We use it only to respond to your inquiry.
               </p>
               <p className="brief-feedback" role="status" aria-live="polite">{feedback}</p>
             </div>
