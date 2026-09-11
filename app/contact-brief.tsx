@@ -10,32 +10,48 @@ export default function ContactBrief() {
   const [isOpen, setIsOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
 
-  function openBrief() {
+  function revealBrief() {
     setIsOpen(true);
     window.setTimeout(() => {
       document.getElementById("capture-brief")?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-    }, 20);
+    }, 30);
+  }
+
+  function openBrief() {
+    revealBrief();
   }
 
   useEffect(() => {
     function openFromHash() {
       if (window.location.hash !== "#capture-brief") return;
+      revealBrief();
+    }
 
-      setIsOpen(true);
-      window.setTimeout(() => {
-        document.getElementById("capture-brief")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 30);
+    function handleBriefLinkClick(event: MouseEvent) {
+      const target = event.target as Element | null;
+      const link = target?.closest('a[href="#capture-brief"]');
+      if (!link) return;
+
+      event.preventDefault();
+
+      if (window.location.hash !== "#capture-brief") {
+        window.history.pushState(null, "", "#capture-brief");
+      }
+
+      revealBrief();
     }
 
     openFromHash();
     window.addEventListener("hashchange", openFromHash);
-    return () => window.removeEventListener("hashchange", openFromHash);
+    document.addEventListener("click", handleBriefLinkClick);
+
+    return () => {
+      window.removeEventListener("hashchange", openFromHash);
+      document.removeEventListener("click", handleBriefLinkClick);
+    };
   }, []);
 
   function closeBrief() {
