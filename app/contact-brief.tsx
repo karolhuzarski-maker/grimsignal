@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -20,9 +20,36 @@ export default function ContactBrief() {
     }, 20);
   }
 
+  useEffect(() => {
+    function openFromHash() {
+      if (window.location.hash !== "#capture-brief") return;
+
+      setIsOpen(true);
+      window.setTimeout(() => {
+        document.getElementById("capture-brief")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 30);
+    }
+
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, []);
+
   function closeBrief() {
     setIsOpen(false);
     setFeedback("");
+
+    if (window.location.hash === "#capture-brief") {
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${window.location.search}`,
+      );
+    }
+
     document.getElementById("contact")?.scrollIntoView({
       behavior: "smooth",
       block: "center",
