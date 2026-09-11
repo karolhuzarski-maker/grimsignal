@@ -20,21 +20,21 @@
 }
 
 .footer-identity p {
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.55;
-  letter-spacing: .13em;
-  color: rgba(13, 17, 21, .62);
+  letter-spacing: .12em;
+  color: rgba(13, 17, 21, .68);
 }
 
 .footer-legal {
-  font-size: 9px;
-  line-height: 1.55;
-  letter-spacing: .11em;
-  color: rgba(13, 17, 21, .62);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .1em;
+  color: rgba(13, 17, 21, .68);
 }
 
 .footer-legal a {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
 }
 
@@ -74,18 +74,18 @@
   }
 
   .footer-identity p {
-    max-width: 280px;
-    font-size: 9px;
+    max-width: 290px;
+    font-size: 11px;
   }
 
   .footer-legal {
-    gap: 13px 24px;
-    font-size: 9px;
-    line-height: 1.55;
+    gap: 15px 26px;
+    font-size: 11px;
+    line-height: 1.5;
   }
 
   .footer-legal a {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -102,7 +102,15 @@
     font-size: 9px;
   }
 
+  .footer-identity p {
+    font-size: 12px;
+  }
+
   .footer-legal {
-    font-size: 9px;
+    font-size: 12px;
+  }
+
+  .footer-legal a {
+    font-size: 13px;
   }
 }
