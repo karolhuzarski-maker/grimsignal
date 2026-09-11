@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -10,6 +10,7 @@ export default function ContactBrief() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
   function revealBrief() {
     setIsOpen(true);
@@ -80,22 +81,24 @@ export default function ContactBrief() {
     });
   }
 
-  async function submitBrief(form: HTMLFormElement) {
-    if (isSubmitting) return;
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const form = event.currentTarget;
+
+    if (isSubmitting) {
+      event.preventDefault();
+      return;
+    }
 
     setFeedback("");
 
     const data = new FormData(form);
     const message = String(data.get("message") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
-    const organization = String(data.get("organization") ?? "").trim();
-    const reference = String(data.get("reference") ?? "").trim();
     const honey = String(data.get("_honey") ?? "").trim();
-    const intent = String(data.get("intent") ?? "Not specified");
-    const timing = String(data.get("timing") ?? "Not specified");
     const emailControl = form.elements.namedItem("email") as HTMLInputElement;
 
     if (!message) {
+      event.preventDefault();
       setFeedback("ADD A SHORT MESSAGE TO CONTINUE.");
       (form.elements.namedItem("message") as HTMLTextAreaElement).focus();
       keepBriefVisible();
@@ -103,6 +106,7 @@ export default function ContactBrief() {
     }
 
     if (!email || !emailControl.checkValidity()) {
+      event.preventDefault();
       setFeedback("ADD A VALID RETURN EMAIL.");
       emailControl.focus();
       keepBriefVisible();
@@ -110,61 +114,27 @@ export default function ContactBrief() {
     }
 
     if (honey) {
+      event.preventDefault();
       setFeedback("BRIEF RECEIVED. THANK YOU.");
       form.reset();
       keepBriefVisible();
       return;
     }
 
-    const signals = data.getAll("signals").join(", ") || "Not specified";
-    const subject = `GRIM SIGNAL LABS — Capture brief — ${organization || intent}`;
-
     setIsSubmitting(true);
     setFeedback("SENDING BRIEF…");
     keepBriefVisible();
-
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/echo@grimsignallabs.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          _subject: subject,
-          _template: "table",
-          _captcha: "false",
-          email,
-          organization: organization || "Not provided",
-          message,
-          topic: intent,
-          useful_signals: signals,
-          target_window: timing,
-          reference: reference || "Not provided",
-          source: "GRIM SIGNAL LABS website / capture brief",
-        }),
-      });
-
-      const result = await response.json().catch(() => null);
-
-      if (!response.ok || result?.success === "false" || result?.success === false) {
-        throw new Error("Submission failed");
-      }
-
-      form.reset();
-      setFeedback("BRIEF RECEIVED. WE’LL GET BACK TO YOU BY EMAIL.");
-      keepBriefVisible();
-    } catch {
-      setFeedback("COULDN’T SEND THE BRIEF. PLEASE TRY AGAIN OR EMAIL ECHO@GRIMSIGNALLABS.COM.");
-      keepBriefVisible();
-    } finally {
-      setIsSubmitting(false);
-    }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    void submitBrief(event.currentTarget);
+  function handleSubmissionFrameLoad() {
+    if (!isSubmitting) return;
+
+    formRef.current?.reset();
+    setIsSubmitting(false);
+    setFeedback(
+      "BRIEF RECEIVED. IF THIS IS YOUR FIRST TEST, CHECK ECHO@GRIMSIGNALLABS.COM FOR THE ONE-TIME ACTIVATION EMAIL.",
+    );
+    keepBriefVisible();
   }
 
   return (
@@ -179,7 +149,8 @@ export default function ContactBrief() {
           display: block;
         }
 
-        .brief-honeypot {
+        .brief-honeypot,
+        .brief-submit-frame {
           position: absolute !important;
           width: 1px !important;
           height: 1px !important;
@@ -260,7 +231,20 @@ export default function ContactBrief() {
             </a>
           </header>
 
-          <form className="quick-brief-form" onSubmit={handleSubmit} noValidate>
+          <form
+            ref={formRef}
+            className="quick-brief-form"
+            action="https://formsubmit.co/echo@grimsignallabs.com"
+            method="POST"
+            target="capture-brief-target"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <input type="hidden" name="_subject" value="GRIM SIGNAL LABS — New capture brief" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="source" value="GRIM SIGNAL LABS website / capture brief" />
+
             <input
               className="brief-honeypot"
               type="text"
@@ -333,23 +317,22 @@ export default function ContactBrief() {
                 </div>
               </details>
 
-              <button
-                className="brief-submit"
-                type="button"
-                disabled={isSubmitting}
-                onClick={(event) => {
-                  const form = event.currentTarget.form;
-                  if (form) void submitBrief(form);
-                }}
-              >
+              <button className="brief-submit" type="submit" disabled={isSubmitting}>
                 <span>{isSubmitting ? "SENDING BRIEF…" : "SEND CAPTURE BRIEF"}</span><Arrow />
               </button>
               <p className="brief-privacy">
-                Your brief is sent securely to GRIM SIGNAL LABS. We use it only to respond to your inquiry.
+                Your brief is sent to GRIM SIGNAL LABS without opening your email app.
               </p>
               <p className="brief-feedback" role="status" aria-live="polite">{feedback}</p>
             </div>
           </form>
+
+          <iframe
+            className="brief-submit-frame"
+            name="capture-brief-target"
+            title="Capture brief submission"
+            onLoad={handleSubmissionFrameLoad}
+          />
         </div>
       </section>
     </>
