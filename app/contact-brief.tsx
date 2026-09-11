@@ -2,6 +2,14 @@
 
 import { FormEvent, useEffect, useState } from "react";
 
+const WEB3FORMS_ACCESS_KEY = [
+  "ec086683",
+  "8a76",
+  "49ec",
+  "b283",
+  "d7e6b2aef86c",
+].join("-");
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -80,19 +88,23 @@ export default function ContactBrief() {
     });
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     if (isSubmitting) return;
 
     const form = event.currentTarget;
-    setFeedback("");
-
     const data = new FormData(form);
     const message = String(data.get("message") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
-    const honey = String(data.get("_honey") ?? "").trim();
+    const organization = String(data.get("organization") ?? "").trim();
+    const reference = String(data.get("reference") ?? "").trim();
+    const botcheck = String(data.get("botcheck") ?? "").trim();
+    const intent = String(data.get("intent") ?? "Not specified");
+    const timing = String(data.get("timing") ?? "Not specified");
+    const signals = data.getAll("signals").map(String).join(", ") || "Not specified";
     const emailControl = form.elements.namedItem("email") as HTMLInputElement;
+
+    setFeedback("");
 
     if (!message) {
       setFeedback("ADD A SHORT MESSAGE TO CONTINUE.");
@@ -108,32 +120,64 @@ export default function ContactBrief() {
       return;
     }
 
-    if (honey) {
+    if (botcheck) {
       setFeedback("BRIEF RECEIVED. THANK YOU.");
       form.reset();
       keepBriefVisible();
       return;
     }
 
-    const urlControl = form.elements.namedItem("_url") as HTMLInputElement | null;
-    if (urlControl) {
-      urlControl.value = `${window.location.origin}${window.location.pathname}`;
-    }
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 12000);
 
     setIsSubmitting(true);
     setFeedback("SENDING BRIEF…");
     keepBriefVisible();
 
-    form.submit();
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        signal: controller.signal,
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `GRIM SIGNAL LABS — Capture brief — ${organization || intent}`,
+          from_name: "GRIM SIGNAL LABS website",
+          email,
+          organization: organization || "Not provided",
+          message,
+          topic: intent,
+          useful_signals: signals,
+          target_window: timing,
+          reference: reference || "Not provided",
+          source: `${window.location.origin}${window.location.pathname}`,
+        }),
+      });
 
-    window.setTimeout(() => {
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message || "Submission failed");
+      }
+
       form.reset();
-      setIsSubmitting(false);
+      setFeedback("BRIEF RECEIVED. WE’LL GET BACK TO YOU BY EMAIL.");
+      keepBriefVisible();
+    } catch (error) {
+      const timedOut = error instanceof DOMException && error.name === "AbortError";
       setFeedback(
-        "BRIEF SUBMITTED. IF THIS IS YOUR FIRST TEST, CHECK ECHO@GRIMSIGNALLABS.COM FOR THE ONE-TIME ACTIVATION EMAIL.",
+        timedOut
+          ? "SEND TIMED OUT. PLEASE TRY AGAIN."
+          : "COULDN’T SEND THE BRIEF. PLEASE TRY AGAIN OR EMAIL ECHO@GRIMSIGNALLABS.COM.",
       );
       keepBriefVisible();
-    }, 1400);
+    } finally {
+      window.clearTimeout(timeoutId);
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -148,8 +192,7 @@ export default function ContactBrief() {
           display: block;
         }
 
-        .brief-honeypot,
-        .brief-submit-frame {
+        .brief-honeypot {
           position: absolute !important;
           width: 1px !important;
           height: 1px !important;
@@ -230,24 +273,11 @@ export default function ContactBrief() {
             </a>
           </header>
 
-          <form
-            className="quick-brief-form"
-            action="https://formsubmit.co/echo@grimsignallabs.com"
-            method="POST"
-            target="capture-brief-target"
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            <input type="hidden" name="_subject" value="GRIM SIGNAL LABS — New capture brief" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_url" value="" />
-            <input type="hidden" name="source" value="GRIM SIGNAL LABS website / capture brief" />
-
+          <form className="quick-brief-form" onSubmit={handleSubmit} noValidate>
             <input
               className="brief-honeypot"
               type="text"
-              name="_honey"
+              name="botcheck"
               tabIndex={-1}
               autoComplete="off"
               aria-hidden="true"
@@ -320,17 +350,11 @@ export default function ContactBrief() {
                 <span>{isSubmitting ? "SENDING BRIEF…" : "SEND CAPTURE BRIEF"}</span><Arrow />
               </button>
               <p className="brief-privacy">
-                Your brief is sent to GRIM SIGNAL LABS without opening your email app.
+                Your brief is sent securely to GRIM SIGNAL LABS. We use it only to respond to your inquiry.
               </p>
               <p className="brief-feedback" role="status" aria-live="polite">{feedback}</p>
             </div>
           </form>
-
-          <iframe
-            className="brief-submit-frame"
-            name="capture-brief-target"
-            title="Capture brief submission"
-          />
         </div>
       </section>
     </>
