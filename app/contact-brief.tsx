@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -10,7 +10,6 @@ export default function ContactBrief() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const formRef = useRef<HTMLFormElement>(null);
 
   function revealBrief() {
     setIsOpen(true);
@@ -82,13 +81,11 @@ export default function ContactBrief() {
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (isSubmitting) return;
+
     const form = event.currentTarget;
-
-    if (isSubmitting) {
-      event.preventDefault();
-      return;
-    }
-
     setFeedback("");
 
     const data = new FormData(form);
@@ -98,7 +95,6 @@ export default function ContactBrief() {
     const emailControl = form.elements.namedItem("email") as HTMLInputElement;
 
     if (!message) {
-      event.preventDefault();
       setFeedback("ADD A SHORT MESSAGE TO CONTINUE.");
       (form.elements.namedItem("message") as HTMLTextAreaElement).focus();
       keepBriefVisible();
@@ -106,7 +102,6 @@ export default function ContactBrief() {
     }
 
     if (!email || !emailControl.checkValidity()) {
-      event.preventDefault();
       setFeedback("ADD A VALID RETURN EMAIL.");
       emailControl.focus();
       keepBriefVisible();
@@ -114,27 +109,31 @@ export default function ContactBrief() {
     }
 
     if (honey) {
-      event.preventDefault();
       setFeedback("BRIEF RECEIVED. THANK YOU.");
       form.reset();
       keepBriefVisible();
       return;
     }
 
+    const urlControl = form.elements.namedItem("_url") as HTMLInputElement | null;
+    if (urlControl) {
+      urlControl.value = `${window.location.origin}${window.location.pathname}`;
+    }
+
     setIsSubmitting(true);
     setFeedback("SENDING BRIEF…");
     keepBriefVisible();
-  }
 
-  function handleSubmissionFrameLoad() {
-    if (!isSubmitting) return;
+    form.submit();
 
-    formRef.current?.reset();
-    setIsSubmitting(false);
-    setFeedback(
-      "BRIEF RECEIVED. IF THIS IS YOUR FIRST TEST, CHECK ECHO@GRIMSIGNALLABS.COM FOR THE ONE-TIME ACTIVATION EMAIL.",
-    );
-    keepBriefVisible();
+    window.setTimeout(() => {
+      form.reset();
+      setIsSubmitting(false);
+      setFeedback(
+        "BRIEF SUBMITTED. IF THIS IS YOUR FIRST TEST, CHECK ECHO@GRIMSIGNALLABS.COM FOR THE ONE-TIME ACTIVATION EMAIL.",
+      );
+      keepBriefVisible();
+    }, 1400);
   }
 
   return (
@@ -232,7 +231,6 @@ export default function ContactBrief() {
           </header>
 
           <form
-            ref={formRef}
             className="quick-brief-form"
             action="https://formsubmit.co/echo@grimsignallabs.com"
             method="POST"
@@ -243,6 +241,7 @@ export default function ContactBrief() {
             <input type="hidden" name="_subject" value="GRIM SIGNAL LABS — New capture brief" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_url" value="" />
             <input type="hidden" name="source" value="GRIM SIGNAL LABS website / capture brief" />
 
             <input
@@ -331,7 +330,6 @@ export default function ContactBrief() {
             className="brief-submit-frame"
             name="capture-brief-target"
             title="Capture brief submission"
-            onLoad={handleSubmissionFrameLoad}
           />
         </div>
       </section>
