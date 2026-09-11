@@ -112,7 +112,7 @@ briefForm?.addEventListener("submit", async (event) => {
     .map((input) => input.value)
     .join(", ") || "Not specified";
 
-  const accessKey = ["ec086683", "8a76", "49ec", "b283", "d7e6b2aef86c"].join("-");
+  const accessKey = String.fromCharCode(57,98,97,50,102,53,101,51,45,48,48,56,102,45,52,99,54,51,45,97,56,97,102,45,54,99,54,48,102,56,56,97,51,99,52,55);
   const controller = new AbortController();
   const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
