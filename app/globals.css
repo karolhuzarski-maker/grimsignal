@@ -609,21 +609,30 @@ footer {
 }
 
 .footer-identity p {
-  max-width: 230px;
+  max-width: 290px;
   margin: 0;
   text-align: left;
+  color: rgba(13,17,21,.68);
+  font-size: 11px;
+  line-height: 1.55;
+  letter-spacing: .12em;
 }
 
 .footer-legal {
   display: grid;
   grid-template-columns: repeat(2, auto);
-  gap: 11px 28px;
-  color: rgba(13,17,21,.48);
-  font-size: 7px;
-  letter-spacing: .14em;
+  gap: 15px 34px;
+  color: rgba(13,17,21,.68);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .1em;
 }
 
-.footer-legal a { color: var(--ink); font-weight: 800; }
+.footer-legal a {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
 
 @keyframes brief-open {
   from { opacity: 0; transform: translateY(34px); }
@@ -645,7 +654,12 @@ footer {
     border-left: 0;
   }
 
-  footer { grid-template-columns: 1fr; }
+  footer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
   .footer-identity { justify-content: center; flex-direction: column; gap: 18px; }
   .footer-identity p { text-align: center; }
   .footer-legal { justify-content: center; text-align: center; }
@@ -659,7 +673,14 @@ footer {
   .brief-close { margin-right: -10px; }
   .intent-options { grid-template-columns: 1fr; }
   .contact-email-path a { font-size: 12px; }
-  .footer-legal { grid-template-columns: 1fr; }
+  .footer-identity p { max-width: 310px; font-size: 12px; }
+  .footer-legal {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 14px;
+    font-size: 12px;
+  }
+  .footer-legal a { font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
