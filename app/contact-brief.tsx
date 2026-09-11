@@ -21,6 +21,15 @@ export default function ContactBrief() {
     }, 30);
   }
 
+  function keepBriefVisible() {
+    window.requestAnimationFrame(() => {
+      document.getElementById("capture-brief")?.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      });
+    });
+  }
+
   useEffect(() => {
     function openFromHash() {
       if (window.location.hash !== "#capture-brief") return;
@@ -71,13 +80,11 @@ export default function ContactBrief() {
     });
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function submitBrief(form: HTMLFormElement) {
     if (isSubmitting) return;
 
     setFeedback("");
 
-    const form = event.currentTarget;
     const data = new FormData(form);
     const message = String(data.get("message") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
@@ -91,18 +98,21 @@ export default function ContactBrief() {
     if (!message) {
       setFeedback("ADD A SHORT MESSAGE TO CONTINUE.");
       (form.elements.namedItem("message") as HTMLTextAreaElement).focus();
+      keepBriefVisible();
       return;
     }
 
     if (!email || !emailControl.checkValidity()) {
       setFeedback("ADD A VALID RETURN EMAIL.");
       emailControl.focus();
+      keepBriefVisible();
       return;
     }
 
     if (honey) {
       setFeedback("BRIEF RECEIVED. THANK YOU.");
       form.reset();
+      keepBriefVisible();
       return;
     }
 
@@ -111,6 +121,7 @@ export default function ContactBrief() {
 
     setIsSubmitting(true);
     setFeedback("SENDING BRIEF…");
+    keepBriefVisible();
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/echo@grimsignallabs.com", {
@@ -142,11 +153,18 @@ export default function ContactBrief() {
 
       form.reset();
       setFeedback("BRIEF RECEIVED. WE’LL GET BACK TO YOU BY EMAIL.");
+      keepBriefVisible();
     } catch {
       setFeedback("COULDN’T SEND THE BRIEF. PLEASE TRY AGAIN OR EMAIL ECHO@GRIMSIGNALLABS.COM.");
+      keepBriefVisible();
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void submitBrief(event.currentTarget);
   }
 
   return (
@@ -315,7 +333,15 @@ export default function ContactBrief() {
                 </div>
               </details>
 
-              <button className="brief-submit" type="submit" disabled={isSubmitting}>
+              <button
+                className="brief-submit"
+                type="button"
+                disabled={isSubmitting}
+                onClick={(event) => {
+                  const form = event.currentTarget.form;
+                  if (form) void submitBrief(form);
+                }}
+              >
                 <span>{isSubmitting ? "SENDING BRIEF…" : "SEND CAPTURE BRIEF"}</span><Arrow />
               </button>
               <p className="brief-privacy">
