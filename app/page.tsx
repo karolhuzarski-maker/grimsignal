@@ -5,30 +5,30 @@ import ContactBrief from "./contact-brief";
 const offers = [
   {
     index: "01",
-    title: "Custom multisensor capture",
-    text: "We stage and record the hard-to-source scenes you need — using the viewpoints, sensors, conditions and file specification defined in your brief.",
-    tag: "RECORDED TO BRIEF",
+    title: "Custom Pilot Capture — from €1,000",
+    text: "A tightly scoped proof-of-concept for one agreed model failure or data gap: scenario design, field capture, RAW data and baseline metadata / ground truth within the agreed scope.",
+    tag: "LOW-RISK ENTRY POINT",
   },
   {
     index: "02",
-    title: "Licensable footage packs",
-    text: "Rights-cleared RGB, thermal and responder-view sequences covering difficult human, terrain and emergency conditions.",
-    tag: "CLEAR USAGE RIGHTS",
+    title: "Custom edge-case datasets",
+    text: "We design and capture the hard-to-source scenes your model needs — around a specific failure mode, sensor stack, environment and annotation requirement.",
+    tag: "BUILT TO YOUR FAILURE MODE",
   },
   {
     index: "03",
-    title: "Scenario production",
-    text: "Controlled emergency, rescue and human-activity scenes produced with actors, props, locations and field-domain supervision.",
-    tag: "CONTROLLED CONDITIONS",
+    title: "Licensable mission datasets",
+    text: "Rights-cleared RGB, thermal, aerial, ground and responder-view sequences covering difficult human, terrain and emergency conditions.",
+    tag: "CLEAR USAGE RIGHTS",
   },
 ];
 
 const useCases = [
-  "Model-training footage",
-  "Search and rescue scenes",
+  "Mass-casualty / MCI scene understanding",
+  "Search & rescue detection",
   "Human activity in degraded visibility",
   "Emergency response sequences",
-  "Aerial–ground multisensor footage",
+  "Aerial–ground multisensor fusion",
   "Robotics and computer vision R&D",
 ];
 
@@ -77,15 +77,15 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="eyebrow"><span /> REAL-WORLD DATA / PHYSICAL AI</div>
-          <h1>Capture the scene<br />you can’t download.</h1>
+          <div className="eyebrow"><span /> CUSTOM REAL-WORLD DATA / AI + CV</div>
+          <h1>We design and capture<br />the edge cases your model is missing.</h1>
           <p>
-            Rights-cleared, synchronized RGB, thermal, aerial, ground and
-            responder-view footage for AI teams, robotics developers and R&amp;D.
+            Custom multisensor datasets for mass-casualty, search &amp; rescue and
+            complex field environments — RGB, thermal, UAV, ground and responder-view.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#capture-brief">Commission a capture <Arrow /></a>
-            <a className="button button-ghost" href="#data">Explore footage formats</a>
+            <a className="button button-primary" href="#capture-brief">Tell us what your model fails to see <Arrow /></a>
+            <a className="button button-ghost" href="#data">See what we capture</a>
           </div>
         </div>
 
@@ -93,7 +93,7 @@ export default function Home() {
           <DroneVisual />
         </div>
 
-        <div className="hero-index">01 — UAV / SIGNAL ACQUISITION</div>
+        <div className="hero-index">01 — CUSTOM EDGE-CASE DATASETS</div>
       </section>
 
       <section className="proof-strip" aria-label="Core standards">
@@ -105,14 +105,13 @@ export default function Home() {
       </section>
 
       <section className="intro section-pad" id="capabilities">
-        <div className="section-kicker">THE GAP</div>
+        <div className="section-kicker">THE DATA GAP</div>
         <div className="intro-body">
-          <h2>Rare scenes are<br />hard to source.</h2>
+          <h2>Your hardest failure cases<br />rarely exist in stock libraries.</h2>
           <p>
-            Stock libraries cover the ordinary. We record the operational edge:
-            people on the ground, partial occlusion, smoke, low light, difficult
-            terrain and coordinated response — with the metadata and provenance
-            needed for commercial AI, robotics and R&amp;D use.
+            Tell us where the model breaks. We turn that failure mode into a controlled
+            field scenario, capture it from the sensor viewpoints you need, and deliver
+            a documented dataset built for validation, fine-tuning or benchmarking.
           </p>
         </div>
       </section>
@@ -123,19 +122,19 @@ export default function Home() {
             <div className="card-head"><span>{offer.index}</span><small>{offer.tag}</small></div>
             <h3>{offer.title}</h3>
             <p>{offer.text}</p>
-            <a href="#capture-brief" aria-label={`Discuss ${offer.title}`}>Discuss a brief <Arrow /></a>
+            <a href="#capture-brief" aria-label={`Discuss ${offer.title}`}>Request a dataset <Arrow /></a>
           </article>
         ))}
       </section>
 
       <section className="data-section section-pad" id="data">
         <div className="data-copy">
-          <div className="section-kicker light">FOOTAGE PACKAGE</div>
-          <h2>One scene.<br />Every useful angle.</h2>
+          <div className="section-kicker light">WHAT WE CAPTURE</div>
+          <h2>One hard case.<br />Every useful sensor view.</h2>
           <p>
-            Each production is delivered as an organized footage package — not
-            an anonymous folder of clips. Camera files, synchronization records,
-            scene notes and usage rights travel together in a Capture Manifest.
+            Each production is delivered as an organized dataset package — not an
+            anonymous folder of clips. Camera files, synchronization records, scenario
+            notes, provenance and agreed metadata / ground truth travel together.
           </p>
           <ul className="use-list">
             {useCases.map((item, index) => (
@@ -160,7 +159,7 @@ export default function Home() {
             <div><dt>Recording</dt><dd>4K VIDEO / RADIOMETRIC THERMAL</dd></div>
             <div><dt>Scene record</dt><dd>TAKE / ACTION / CAMERA / TIMECODE</dd></div>
             <div><dt>Delivery</dt><dd>RAW / MASTER / PROXY / SELECTS</dd></div>
-            <div><dt>Usage rights</dt><dd>CONSENTED / LICENSED / DOCUMENTED</dd></div>
+            <div><dt>Ground truth</dt><dd>DEFINED PER PROJECT SCOPE</dd></div>
           </dl>
           <div className="passport-foot"><span>SCENARIO HASH</span><code>GS1-EU-MCI-8F31</code></div>
         </div>
@@ -169,10 +168,10 @@ export default function Home() {
       <section className="library section-pad">
         <div className="library-head">
           <div>
-            <div className="section-kicker">MISSION LIBRARY</div>
-            <h2>Built around the hard parts.</h2>
+            <div className="section-kicker">HARD CASES</div>
+            <h2>Built around conditions<br />that break perception systems.</h2>
           </div>
-          <p>Starting collections for commercial licensing, model training, product demonstrations and R&amp;D.</p>
+          <p>Examples of the difficult scenarios and sensor combinations we can design, stage and capture.</p>
         </div>
         <div className="pack-list">
           {packs.map((pack) => (
@@ -188,36 +187,36 @@ export default function Home() {
 
       <section className="why section-pad">
         <div className="section-kicker light">WHY GRIM SIGNAL LABS</div>
-        <h2>Field reality, captured<br />from every useful viewpoint.</h2>
+        <h2>We are not a drone company.<br />We build missing field data.</h2>
         <div className="why-grid">
           <article>
             <span>01</span>
-            <h3>Operational domain knowledge</h3>
-            <p>Emergency scenarios designed with field medical and training expertise — not stock-footage assumptions.</p>
+            <h3>Failure-mode first</h3>
+            <p>We start with what your model misses, confuses or cannot reliably detect — then design the capture around that data gap.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Controlled complexity</h3>
-            <p>We control visibility, posture, movement, occlusion and response actions while preserving a clear production record.</p>
+            <h3>Controlled field complexity</h3>
+            <p>RGB, thermal, UAV, ground cameras and POV/bodycam across smoke, darkness, occlusion, clutter and difficult terrain.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Commercially usable</h3>
-            <p>Consent, provenance, scenario documentation and licensing are part of the deliverable from day one.</p>
+            <h3>Operationally credible</h3>
+            <p>MCI, SAR and emergency-response scenarios are shaped by real field-domain knowledge, with documented provenance and commercial usage rights.</p>
           </article>
         </div>
       </section>
 
       <section className="method section-pad" id="method">
         <div className="method-title">
-          <div className="section-kicker">MISSION WORKFLOW</div>
-          <h2>From capture brief<br />to licensed footage.</h2>
+          <div className="section-kicker">HOW TO REQUEST A CUSTOM DATASET</div>
+          <h2>From model failure<br />to usable field data.</h2>
         </div>
         <ol>
-          <li><span>01</span><div><strong>Brief</strong><p>Required scene, viewpoints, sensors, conditions and intended usage.</p></div></li>
-          <li><span>02</span><div><strong>Stage</strong><p>Rights-cleared location, actors, actions, props and shot plan.</p></div></li>
-          <li><span>03</span><div><strong>Capture</strong><p>Synchronized aerial, thermal, ground and responder views.</p></div></li>
-          <li><span>04</span><div><strong>Deliver</strong><p>Organized files, synchronization sheet, Capture Manifest and commercial license.</p></div></li>
+          <li><span>01</span><div><strong>Describe the failure</strong><p>Tell us what the model fails to see, classify or track — and under which conditions.</p></div></li>
+          <li><span>02</span><div><strong>Define the capture</strong><p>We agree scenario, sensors, viewpoints, conditions, metadata / ground truth and delivery scope.</p></div></li>
+          <li><span>03</span><div><strong>Stage &amp; capture</strong><p>We produce the field scenario and record synchronized aerial, thermal, ground and responder views as required.</p></div></li>
+          <li><span>04</span><div><strong>Deliver the dataset</strong><p>RAW data, organized files, capture manifest, agreed annotations / metadata and licensing documentation.</p></div></li>
         </ol>
       </section>
 
@@ -256,7 +255,7 @@ export default function Home() {
               height="412"
             />
           </a>
-          <p>REAL-WORLD MULTIMODAL DATA FOR PHYSICAL AI.</p>
+          <p>CUSTOM REAL-WORLD EDGE-CASE DATASETS FOR AI / CV.</p>
         </div>
         <div className="footer-legal">
           <a href="mailto:echo@grimsignallabs.com">ECHO@GRIMSIGNALLABS.COM</a>
