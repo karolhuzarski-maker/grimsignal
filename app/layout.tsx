@@ -4,32 +4,32 @@ import "./contact-readability.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://grim-signal-labs.karhuz.chatgpt.site"),
-  title: "GRIM SIGNAL LABS — Multisensor Footage for Physical AI",
+  title: "GRIM SIGNAL LABS — Custom Edge-Case Datasets for AI / CV",
   description:
-    "Rights-cleared RGB, thermal, aerial, ground and responder-view footage for computer vision, robotics and R&D.",
+    "Custom real-world multisensor datasets for AI and computer vision, focused on mass-casualty, search & rescue and complex field environments.",
   icons: {
     icon: [{ url: "/favicon.svg?v=3", type: "image/svg+xml" }],
     shortcut: "/favicon.svg?v=3",
   },
   openGraph: {
-    title: "GRIM SIGNAL LABS — Capture the scene you can’t download.",
+    title: "GRIM SIGNAL LABS — The edge cases your model is missing.",
     description:
-      "Real-world, synchronized multisensor footage for computer vision, robotics and R&D.",
+      "Custom RGB, thermal, UAV, ground and responder-view datasets for difficult real-world AI/CV failure modes.",
     type: "website",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "GRIM SIGNAL LABS — Multisensor footage for Physical AI",
+        alt: "GRIM SIGNAL LABS — Custom edge-case datasets for AI / CV",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GRIM SIGNAL LABS — Capture the scene you can’t download.",
+    title: "GRIM SIGNAL LABS — The edge cases your model is missing.",
     description:
-      "Real-world, synchronized multisensor footage for computer vision, robotics and R&D.",
+      "Custom RGB, thermal, UAV, ground and responder-view datasets for difficult real-world AI/CV failure modes.",
     images: ["/og.png"],
   },
 };
