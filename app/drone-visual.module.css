@@ -1,7 +1,7 @@
 .frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 1448 / 950;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   background: #070a0d;
 }
@@ -86,7 +86,7 @@
 
 @media (max-width: 860px) {
   .frame {
-    aspect-ratio: 1448 / 950;
+    aspect-ratio: 16 / 9;
     min-height: 0;
   }
 
