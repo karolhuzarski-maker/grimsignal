@@ -1,19 +1,14 @@
-.hero h1 {
-  font-size: clamp(46px, 4.7vw, 76px);
-  line-height: .94;
-  letter-spacing: -.045em;
-  max-width: 760px;
-}
-
-@media (max-width: 1100px) {
+@media (min-width: 861px) {
   .hero h1 {
-    font-size: clamp(44px, 5.7vw, 66px);
+    font-size: clamp(46px, 4.7vw, 76px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    max-width: 760px;
   }
 }
 
-@media (max-width: 860px) {
+@media (min-width: 861px) and (max-width: 1100px) {
   .hero h1 {
-    font-size: clamp(38px, 10vw, 54px);
-    line-height: .96;
+    font-size: clamp(44px, 5.7vw, 66px);
   }
 }
