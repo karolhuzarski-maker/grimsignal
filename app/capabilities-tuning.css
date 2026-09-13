@@ -45,7 +45,7 @@
     padding: 14px 16px;
     background:
       linear-gradient(180deg, rgba(7,10,13,.00) 46%, rgba(7,10,13,.72) 100%),
-      url("gsl-field-video-poster.webp") center 42% / cover no-repeat;
+      url("gsl-capabilities-thermal.jpg") center 48% / cover no-repeat;
     border: 1px solid rgba(13,17,21,.18);
     color: rgba(255,255,255,.9);
     font-size: 7px;
@@ -87,7 +87,7 @@
     padding: 12px;
     background:
       linear-gradient(180deg, rgba(7,10,13,.00) 46%, rgba(7,10,13,.66) 100%),
-      url("gsl-field-video-poster.webp") center 42% / cover no-repeat;
+      url("gsl-capabilities-thermal.jpg") center 48% / cover no-repeat;
     border: 1px solid rgba(13,17,21,.18);
     color: white;
     font-size: 7px;
