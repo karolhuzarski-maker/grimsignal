@@ -54,6 +54,7 @@ html = html
   .replaceAll('src="/grim-signal-labs-logo.png"', 'src="./grim-signal-labs-logo.png"')
   .replaceAll('href="/grim-signal-labs-logo.png"', 'href="./grim-signal-labs-logo.png"')
   .replaceAll('src="/grim-uav-hero.webp"', 'src="./grim-uav-hero.webp"')
+  .replaceAll('src="/gsl-hero-field.webp"', 'src="./gsl-hero-field.webp"')
   .replace(
     "</head>",
     '<link rel="stylesheet" href="./styles.css"/><link rel="icon" href="./favicon.svg"/></head>',
@@ -76,6 +77,7 @@ await cp(
 for (const asset of [
   "grim-signal-labs-logo.png",
   "grim-uav-hero.webp",
+  "gsl-hero-field.webp",
   "og.png",
   "favicon.svg",
   "script.js",
