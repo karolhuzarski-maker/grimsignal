@@ -78,6 +78,7 @@ for (const asset of [
   "grim-signal-labs-logo.png",
   "grim-uav-hero.webp",
   "gsl-hero-field.webp",
+  "gsl-capabilities-thermal.webp",
   "og.png",
   "favicon.svg",
   "script.js",
@@ -86,7 +87,6 @@ for (const asset of [
   "gsl-field-wide.webp",
   "gsl-field-team.webp",
   "gsl-field-close.webp",
-  "gsl-capabilities-thermal.jpg",
 ]) {
   await cp(path.join(publicDirectory, asset), path.join(outputDirectory, asset));
 }
