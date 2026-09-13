@@ -79,6 +79,11 @@ for (const asset of [
   "og.png",
   "favicon.svg",
   "script.js",
+  "gsl-field-sample.mp4",
+  "gsl-field-video-poster.webp",
+  "gsl-field-wide.webp",
+  "gsl-field-team.webp",
+  "gsl-field-close.webp",
 ]) {
   await cp(path.join(publicDirectory, asset), path.join(outputDirectory, asset));
 }

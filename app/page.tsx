@@ -1,6 +1,7 @@
 import SiteHeader from "./site-header";
 import DroneVisual from "./drone-visual";
 import ContactBrief from "./contact-brief";
+import FieldSample from "./field-sample";
 
 const offers = [
   {
@@ -164,6 +165,8 @@ export default function Home() {
           <div className="passport-foot"><span>SCENARIO HASH</span><code>GS1-EU-MCI-8F31</code></div>
         </div>
       </section>
+
+      <FieldSample />
 
       <section className="library section-pad">
         <div className="library-head">
