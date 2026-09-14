@@ -119,7 +119,7 @@ export default function Home() {
 
       <section className="offer-grid section-pad">
         {offers.map((offer) => (
-          <article className="offer-card" key={offer.index}>
+          <article className={`offer-card${offer.index === "01" ? " offer-card-featured" : ""}`} key={offer.index}>
             <div className="card-head"><span>{offer.index}</span><small>{offer.tag}</small></div>
             <h3>{offer.title}</h3>
             <p>{offer.text}</p>
