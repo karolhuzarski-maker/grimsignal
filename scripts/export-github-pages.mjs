@@ -1,4 +1,4 @@
-import { cp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -12,6 +12,29 @@ const serverEntry = path.join(projectRoot, "dist", "server", "index.js");
 const repository = process.env.GITHUB_REPOSITORY ?? "karolhuzarski-maker/grimsignal";
 const [owner, repositoryName] = repository.split("/");
 const productionUrl = `https://${owner}.github.io/${repositoryName}`;
+
+async function restoreBase64Asset(partsRelativePath, outputName, minimumBytes = 1) {
+  const partsDirectory = path.join(projectRoot, partsRelativePath);
+  const parts = (await readdir(partsDirectory))
+    .filter((file) => file.endsWith(".b64"))
+    .sort();
+
+  if (!parts.length) {
+    throw new Error(`No base64 parts found in ${partsRelativePath}`);
+  }
+
+  const encoded = (
+    await Promise.all(parts.map((file) => readFile(path.join(partsDirectory, file), "utf8")))
+  ).join("");
+  const bytes = Buffer.from(encoded, "base64");
+
+  if (bytes.length < minimumBytes) {
+    throw new Error(`${outputName} reconstructed to only ${bytes.length} bytes`);
+  }
+
+  await writeFile(path.join(outputDirectory, outputName), bytes);
+  console.log(`Restored ${outputName}: ${bytes.length} bytes from ${parts.length} chunks`);
+}
 
 await rm(outputDirectory, { recursive: true, force: true });
 await mkdir(outputDirectory, { recursive: true });
@@ -90,6 +113,10 @@ for (const asset of [
 ]) {
   await cp(path.join(publicDirectory, asset), path.join(outputDirectory, asset));
 }
+
+// GitHub connector binary writes can be truncated. Rebuild the field video from
+// text-safe base64 chunks during CI, then overwrite the public fallback copy.
+await restoreBase64Asset("asset-parts/video48", "gsl-field-sample.mp4", 45000);
 
 await writeFile(path.join(outputDirectory, ".nojekyll"), "");
 
