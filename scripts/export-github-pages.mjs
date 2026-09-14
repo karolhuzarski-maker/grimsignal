@@ -12,6 +12,7 @@ const serverEntry = path.join(projectRoot, "dist", "server", "index.js");
 const repository = process.env.GITHUB_REPOSITORY ?? "karolhuzarski-maker/grimsignal";
 const [owner, repositoryName] = repository.split("/");
 const productionUrl = `https://${owner}.github.io/${repositoryName}`;
+const assetVersion = (process.env.GITHUB_SHA ?? "local").slice(0, 12);
 
 async function restoreBase64Asset(partsRelativePath, outputName, minimumBytes = 1) {
   const partsDirectory = path.join(projectRoot, partsRelativePath);
@@ -81,7 +82,7 @@ html = html
   .replaceAll('src="/gsl-mci-multiview-01.webp"', 'src="./gsl-mci-multiview-01.webp"')
   .replace(
     "</head>",
-    '<link rel="stylesheet" href="./styles.css"/><link rel="icon" href="./favicon.svg"/></head>',
+    `<link rel="stylesheet" href="./styles.css?v=${assetVersion}"/><link rel="icon" href="./favicon.svg"/></head>`,
   )
   .replace("</body>", '<script src="./script.js" defer></script></body>');
 
