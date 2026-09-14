@@ -145,24 +145,13 @@ export default function Home() {
         </div>
 
         <div className="passport">
-          <div className="passport-head">
-            <div><small>GSL CAPTURE MANIFEST</small><strong>MCI / MULTIVIEW 01</strong></div>
-            <span>v1.0</span>
-          </div>
-          <div className="passport-preview">
-            <div className="heat heat-a" />
-            <div className="heat heat-b" />
-            <div className="heat heat-c" />
-            <span className="thermal-label">THERMAL / PALETTE: WHITE HOT</span>
-          </div>
-          <dl className="passport-meta">
-            <div><dt>Streams</dt><dd>RGB / LWIR / POV / GROUND</dd></div>
-            <div><dt>Recording</dt><dd>4K VIDEO / RADIOMETRIC THERMAL</dd></div>
-            <div><dt>Scene record</dt><dd>TAKE / ACTION / CAMERA / TIMECODE</dd></div>
-            <div><dt>Delivery</dt><dd>RAW / MASTER / PROXY / SELECTS</dd></div>
-            <div><dt>Ground truth</dt><dd>DEFINED PER PROJECT SCOPE</dd></div>
-          </dl>
-          <div className="passport-foot"><span>SCENARIO HASH</span><code>GS1-EU-MCI-8F31</code></div>
+          <img
+            src="/gsl-mci-multiview-01.webp"
+            alt="GRIM SIGNAL LABS MCI Multiview capture manifest with thermal and RGB views"
+            width="1448"
+            height="1086"
+            style={{ display: "block", width: "100%", height: "auto" }}
+          />
         </div>
       </section>
 

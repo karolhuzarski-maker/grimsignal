@@ -78,6 +78,7 @@ html = html
   .replaceAll('href="/grim-signal-labs-logo.png"', 'href="./grim-signal-labs-logo.png"')
   .replaceAll('src="/grim-uav-hero.webp"', 'src="./grim-uav-hero.webp"')
   .replaceAll('src="/gsl-hero-field.webp"', 'src="./gsl-hero-field.webp"')
+  .replaceAll('src="/gsl-mci-multiview-01.webp"', 'src="./gsl-mci-multiview-01.webp"')
   .replace(
     "</head>",
     '<link rel="stylesheet" href="./styles.css"/><link rel="icon" href="./favicon.svg"/></head>',
@@ -101,6 +102,7 @@ for (const asset of [
   "grim-signal-labs-logo.png",
   "grim-uav-hero.webp",
   "gsl-hero-field.webp",
+  "gsl-mci-multiview-01.webp",
   "gsl-capabilities-thermal.webp",
   "og.png",
   "favicon.svg",
