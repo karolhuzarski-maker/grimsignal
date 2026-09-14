@@ -15,7 +15,7 @@
   margin: 20px 0 0;
   max-width: 760px;
   text-transform: uppercase;
-  font-size: clamp(46px, 5.4vw, 82px);
+  font-size: var(--section-title-size);
   line-height: .92;
   letter-spacing: -.05em;
   font-weight: 900;
@@ -137,7 +137,7 @@
 }
 
 @media (max-width: 860px) {
-  .field-sample h2 { font-size: 42px; }
+  .field-sample h2 { font-size: var(--section-title-size); }
   .field-sample-copy p { font-size: 15px; }
   .field-tile figcaption { left: 11px; right: 11px; bottom: 10px; grid-template-columns: 1fr; gap: 4px; }
   .field-tile figcaption small { display: none; }

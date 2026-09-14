@@ -25,7 +25,7 @@
     grid-row: 1;
     max-width: 520px;
     min-width: 0;
-    font-size: clamp(38px, 3.15vw, 50px);
+    font-size: var(--section-title-size);
     line-height: .96;
     letter-spacing: -.043em;
   }
@@ -79,7 +79,7 @@
     grid-column: 1;
     grid-row: 1;
     max-width: 440px;
-    font-size: clamp(36px, 4.25vw, 46px);
+    font-size: var(--section-title-size);
     line-height: .96;
     letter-spacing: -.043em;
   }
@@ -128,7 +128,7 @@
 
   .intro h2 {
     max-width: 650px;
-    font-size: clamp(36px, 8.4vw, 46px);
+    font-size: var(--section-title-size);
     line-height: .96;
   }
 
@@ -164,6 +164,6 @@
   }
 
   .intro h2 {
-    font-size: clamp(34px, 9vw, 42px);
+    font-size: var(--section-title-size);
   }
 }
