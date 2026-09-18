@@ -63,6 +63,7 @@ const researchAreas = [
   "Human detection in degraded environments",
   "UAV and ground sensor fusion",
   "Real-world benchmarking",
+  "UAS / C-UxS perception & real-world validation",
   "Physical AI for SAR and disaster response",
 ];
 
@@ -220,8 +221,8 @@ export default function Home() {
             GRIM SIGNAL LABS develops and tests methods for evaluating AI systems
             in realistic crisis environments. Our R&amp;D focuses on multimodal RGB
             and thermal data, degraded visual conditions, UAV and ground-based
-            sensing, real-world benchmarking and AI performance under operational
-            stress.
+            sensing, aerial perception, real-world benchmarking and AI performance
+            under operational stress.
           </p>
         </div>
         <ul className="research-list">
