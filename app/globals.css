@@ -42,10 +42,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .brand { display: inline-flex; align-items: center; width: max-content; }
 .brand-logo { display: block; width: 330px; height: auto; }
-.desktop-nav { display: flex; gap: 36px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; position: relative; }
+.desktop-nav { display: flex; gap: 32px; font-size: 12px; letter-spacing: .11em; text-transform: uppercase; position: relative; }
 .desktop-nav a { opacity: .62; transition: opacity .2s ease; }
 .desktop-nav a:hover { opacity: 1; }
-.desktop-nav .rd-link { position: absolute; left: calc(100% + 36px); white-space: nowrap; }
+.desktop-nav .rd-link { position: absolute; left: calc(100% + 32px); white-space: nowrap; }
 .header-cta {
   justify-self: end;
   min-height: 42px;
