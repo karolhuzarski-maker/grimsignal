@@ -6,7 +6,7 @@ import FieldSample from "./field-sample";
 const offers = [
   {
     index: "01",
-    title: "Custom Pilot Capture — from €1,000",
+    title: "Custom Pilot Capture — from €2,500",
     text: "A tightly scoped proof-of-concept for one agreed model failure or data gap: scenario design, field capture, RAW data and baseline metadata / ground truth within the agreed scope.",
     tag: "LOW-RISK ENTRY POINT",
   },
