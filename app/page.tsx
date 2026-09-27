@@ -245,7 +245,7 @@ export default function Home() {
         <a className="gabriel-teaser gabriel-preview-trigger" href="#gabriel-preview" aria-label="Expand GABRIEL ONE Research Preview">
           <div className="gabriel-teaser-image">
             <img
-              src="/gabriel-one-hero.svg"
+              src="/gabriel-one-hero.webp"
               alt="GABRIEL ONE - drone-assisted casualty tracking research preview"
               width="800"
               height="1000"
@@ -295,7 +295,7 @@ export default function Home() {
                 </div>
               </div>
               <img
-                src="/gabriel-one-hero.svg"
+                src="/gabriel-one-hero.webp"
                 alt="GABRIEL ONE research preview key visual"
                 width="800"
                 height="1000"

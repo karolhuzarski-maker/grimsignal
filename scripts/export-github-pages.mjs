@@ -20,7 +20,7 @@ const staticAssets = [
   "gsl-hero-field.webp",
   "gsl-mci-multiview-01.webp",
   "gsl-capabilities-thermal.webp",
-  "gabriel-one-hero.svg",
+  "gabriel-one-hero.webp",
   "og.png",
   "favicon.svg",
   "script.js",
@@ -91,7 +91,7 @@ function prepareStaticHtml(html, assetPrefix) {
     )
     .replace(
       "</body>",
-      `<script src="${assetPrefix}script.js" defer></script></body>`,
+      `<script src="${assetPrefix}script.js?v=${assetVersion}" defer></script></body>`,
     );
 }
 

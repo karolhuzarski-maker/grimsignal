@@ -1248,7 +1248,8 @@ footer {
   scroll-margin-top: 92px;
 }
 
-.gabriel-inline-preview.is-open {
+.gabriel-inline-preview.is-open,
+.gabriel-inline-preview:target {
   display: block;
   animation: brief-open .42s ease both;
 }
