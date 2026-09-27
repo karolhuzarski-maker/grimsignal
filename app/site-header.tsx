@@ -9,14 +9,14 @@ const links = [
   { href: "#research", label: "R&D" },
 ];
 
-export default function SiteHeader() {
+export default function SiteHeader({ homePrefix = "" }: { homePrefix?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => setMenuOpen(false);\n  const homeLink = (hash: string) => `${homePrefix}${hash}`;
 
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="GRIM SIGNAL LABS home" onClick={closeMenu}>
+      <a className="brand" href={homeLink("#top")} aria-label="GRIM SIGNAL LABS home" onClick={closeMenu}>
         <img
           className="brand-logo"
           src="/grim-signal-labs-logo.png"
@@ -28,11 +28,11 @@ export default function SiteHeader() {
 
       <nav className="desktop-nav" aria-label="Primary navigation">
         {links.map((link) => (
-          <a className={link.href === "#research" ? "rd-link" : undefined} key={link.href} href={link.href}>{link.label}</a>
+          <a className={link.href === "#research" ? "rd-link" : undefined} key={link.href} href={homeLink(link.href)}>{link.label}</a>
         ))}
       </nav>
 
-      <a className="header-cta" href="#contact">
+      <a className="header-cta" href={homeLink("#contact")}>
         Start a mission <span aria-hidden="true">↗</span>
       </a>
 
