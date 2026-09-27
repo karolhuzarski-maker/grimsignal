@@ -274,32 +274,53 @@ export default function Home() {
           <div className="gabriel-inline-content">
             <div className="gabriel-inline-topbar">
               <div>
-                <div className="section-kicker light">GRIM SIGNAL LABS / R&amp;D</div>
-                <h2>GABRIEL <em>ONE</em></h2>
+                <div className="section-kicker light">GABRIEL ONE / RESEARCH PREVIEW</div>
+                <span className="gabriel-inline-code">TEMPORAL SCENE MEMORY / UAV OPERATOR SUPPORT</span>
               </div>
               <a className="gabriel-close" href="#research" aria-label="Close GABRIEL ONE preview">CLOSE ×</a>
             </div>
 
-            <div className="gabriel-inline-hero">
+            <div className="gabriel-inline-hero gabriel-inline-hero-text">
               <div>
+                <h2>From detection<br />to continuity.</h2>
                 <p className="gabriel-inline-lead">
-                  UAV-assisted casualty tracking and reassessment support for complex incidents.
+                  The long-term idea behind GABRIEL ONE is simple: an aerial system should not
+                  treat every frame as a new scene. It should help the operator preserve a memory
+                  of who was seen, where, when, in what condition, and when another look may matter.
                 </p>
                 <p className="gabriel-inline-question">
-                  A drone can find a casualty. What happens five minutes later?
+                  A drone can find a casualty. The harder problem is maintaining context as the
+                  scene changes.
                 </p>
                 <div className="gabriel-statusline">
                   <span>RESEARCH PREVIEW</span>
                   <span>ACTIVE DEVELOPMENT</span>
-                  <span>LIMITED ACCESS</span>
+                  <span>OPERATOR IN THE LOOP</span>
                 </div>
               </div>
-              <img
-                src="/gabriel-one-hero.webp"
-                alt="GABRIEL ONE research preview key visual"
-                width="800"
-                height="1000"
-              />
+            </div>
+
+            <div className="gabriel-system-thesis">
+              <article>
+                <small>01 / ENTITY MEMORY</small>
+                <strong>PERSISTENT CASUALTY ID</strong>
+                <p>Keep a stable reference to the same person across repeated observations.</p>
+              </article>
+              <article>
+                <small>02 / TEMPORAL STATE</small>
+                <strong>OBSERVATION HISTORY</strong>
+                <p>Link what was seen now with what was seen before instead of losing context frame by frame.</p>
+              </article>
+              <article>
+                <small>03 / REVISIT LOGIC</small>
+                <strong>REASSESSMENT CUES</strong>
+                <p>Surface who may need another look and return attention to the right point in the scene.</p>
+              </article>
+              <article>
+                <small>04 / HUMAN CONTROL</small>
+                <strong>OPERATOR DECIDES</strong>
+                <p>Keep the system as decision support: transparent cues, traceable observations, human confirmation.</p>
+              </article>
             </div>
 
             <div className="gabriel-inline-block">
@@ -353,6 +374,30 @@ export default function Home() {
               <ul className="gabriel-inline-focus">
                 {gabrielResearch.map((item) => <li key={item}>{item}</li>)}
               </ul>
+            </div>
+
+            <div className="gabriel-vision">
+              <div className="section-kicker light">VISION / BEYOND THE FIRST DEMO</div>
+              <div className="gabriel-vision-grid">
+                <div>
+                  <h3>A live operational memory layer above the video feed.</h3>
+                  <p>
+                    The first Research Preview stays deliberately small. The wider direction is
+                    a system that can carry scene context forward during a mission instead of
+                    forcing the operator to rebuild that context manually every time the camera moves.
+                  </p>
+                </div>
+                <ul>
+                  <li><span>GEO</span> Georeferenced casualty positions and revisit points</li>
+                  <li><span>TIME</span> Time-stamped observation history and reassessment windows</li>
+                  <li><span>MULTI</span> RGB / thermal observations linked to the same operational entity</li>
+                  <li><span>HANDOFF</span> Continuity between operators, aircraft and later response teams</li>
+                  <li><span>TRACE</span> A reviewable record of what the system suggested and what the operator confirmed</li>
+                </ul>
+              </div>
+              <div className="gabriel-vision-note">
+                VISION DIRECTION - NOT A CLAIM OF CURRENT CAPABILITY
+              </div>
             </div>
 
             <div className="gabriel-inline-access">
