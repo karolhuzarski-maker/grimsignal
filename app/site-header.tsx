@@ -12,7 +12,8 @@ const links = [
 export default function SiteHeader({ homePrefix = "" }: { homePrefix?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);\n  const homeLink = (hash: string) => `${homePrefix}${hash}`;
+  const closeMenu = () => setMenuOpen(false);
+  const homeLink = (hash: string) => `${homePrefix}${hash}`;
 
   return (
     <header className="site-header">
@@ -54,9 +55,9 @@ export default function SiteHeader({ homePrefix = "" }: { homePrefix?: string })
         aria-label="Mobile navigation"
       >
         {links.map((link) => (
-          <a key={link.href} href={link.href} onClick={closeMenu}>{link.label}</a>
+          <a key={link.href} href={homeLink(link.href)} onClick={closeMenu}>{link.label}</a>
         ))}
-        <a className="mobile-mission" href="#contact" onClick={closeMenu}>Start a mission ↗</a>
+        <a className="mobile-mission" href={homeLink("#contact")} onClick={closeMenu}>Start a mission ↗</a>
       </nav>
     </header>
   );
