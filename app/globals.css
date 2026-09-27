@@ -825,22 +825,41 @@ footer {
 .gabriel-statusline {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px 18px;
   margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.10);
 }
 
 .gabriel-statusline span {
-  padding: 8px 10px;
-  border: 1px solid rgba(255,255,255,.14);
-  color: rgba(255,255,255,.58);
+  position: relative;
+  padding: 0 0 0 12px;
+  border: 0;
+  color: rgba(255,255,255,.52);
   font-size: 7px;
   font-weight: 800;
   letter-spacing: .15em;
 }
 
+.gabriel-statusline span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.28);
+  transform: translateY(-50%);
+}
+
 .gabriel-statusline span:first-child {
-  border-color: rgba(197,34,46,.7);
-  color: #ef7a82;
+  color: rgba(255,255,255,.72);
+}
+
+.gabriel-statusline span:first-child::before {
+  background: var(--red);
+  box-shadow: 0 0 0 4px rgba(197,34,46,.10);
 }
 
 .gabriel-hero h1 {
