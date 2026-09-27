@@ -73,11 +73,11 @@ export default function GabrielOnePage() {
 
         <a
           className="gabriel-poster"
-          href="/gabriel-one-hero.svg"
+          href="/gabriel-one-hero.webp"
           aria-label="Open the GABRIEL ONE research preview key visual"
         >
           <img
-            src="/gabriel-one-hero.svg"
+            src="/gabriel-one-hero.webp"
             alt="GABRIEL ONE - drone-assisted casualty tracking research preview"
             width="600"
             height="750"
