@@ -277,20 +277,14 @@ export default function Home() {
                 <div className="section-kicker light">GABRIEL ONE / RESEARCH PREVIEW</div>
                 <span className="gabriel-inline-code">TEMPORAL SCENE MEMORY / UAV OPERATOR SUPPORT</span>
               </div>
-              <a className="gabriel-close" href="#research" aria-label="Close GABRIEL ONE preview">CLOSE ×</a>
             </div>
 
             <div className="gabriel-inline-hero gabriel-inline-hero-text">
               <div>
                 <h2>From detection<br />to continuity.</h2>
                 <p className="gabriel-inline-lead">
-                  The long-term idea behind GABRIEL ONE is simple: an aerial system should not
-                  treat every frame as a new scene. It should help the operator preserve a memory
-                  of who was seen, where, when, in what condition, and when another look may matter.
-                </p>
-                <p className="gabriel-inline-question">
-                  A drone can find a casualty. The harder problem is maintaining context as the
-                  scene changes.
+                  GABRIEL ONE explores a temporal memory layer for UAV operations - keeping track
+                  of who was seen, where, when and when another observation may be needed.
                 </p>
                 <div className="gabriel-statusline">
                   <span>RESEARCH PREVIEW</span>
@@ -321,18 +315,6 @@ export default function Home() {
                 <strong>OPERATOR DECIDES</strong>
                 <p>Keep the system as decision support: transparent cues, traceable observations, human confirmation.</p>
               </article>
-            </div>
-
-            <div className="gabriel-inline-block">
-              <div className="section-kicker light">THE QUESTION</div>
-              <div>
-                <h3>Detection is only the first observation.</h3>
-                <p>
-                  In a complex incident, an aerial team may identify several casualties quickly.
-                  GABRIEL ONE explores how an operator can retain continuity between observations:
-                  who has already been seen, what was observed, and who needs another look.
-                </p>
-              </div>
             </div>
 
             <div className="gabriel-inline-block gabriel-loop-block">
@@ -382,9 +364,8 @@ export default function Home() {
                 <div>
                   <h3>A live operational memory layer above the video feed.</h3>
                   <p>
-                    The first Research Preview stays deliberately small. The wider direction is
-                    a system that can carry scene context forward during a mission instead of
-                    forcing the operator to rebuild that context manually every time the camera moves.
+                    The wider direction is a system that carries scene context forward while the
+                    aircraft, camera angle and operator change.
                   </p>
                 </div>
                 <ul>
@@ -417,6 +398,9 @@ export default function Home() {
                 Request early access <Arrow />
               </a>
               <small>EXPERIMENTAL R&amp;D CONCEPT / OPERATOR SUPPORT / NO AUTONOMOUS TRIAGE DECISIONS</small>
+              <a className="gabriel-close gabriel-close-bottom" href="#research" aria-label="Close GABRIEL ONE preview">
+                CLOSE RESEARCH PREVIEW ↑
+              </a>
             </div>
           </div>
         </div>
