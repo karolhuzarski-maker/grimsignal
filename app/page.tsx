@@ -264,6 +264,9 @@ export default function Home() {
       </section>
 
       <section className="gabriel-inline-preview" id="gabriel-preview" aria-label="GABRIEL ONE Research Preview">
+        <a className="gabriel-close gabriel-sticky-close" href="#research" aria-label="Close GABRIEL ONE preview">
+          CLOSE <span aria-hidden="true">↑</span>
+        </a>
         <div className="gabriel-inline-shell">
           <div className="gabriel-inline-rail">
             <span>GABRIEL ONE</span>
@@ -398,9 +401,6 @@ export default function Home() {
                 Request early access <Arrow />
               </a>
               <small>EXPERIMENTAL R&amp;D CONCEPT / OPERATOR SUPPORT / NO AUTONOMOUS TRIAGE DECISIONS</small>
-              <a className="gabriel-close gabriel-close-bottom" href="#research" aria-label="Close GABRIEL ONE preview">
-                CLOSE RESEARCH PREVIEW ↑
-              </a>
             </div>
           </div>
         </div>

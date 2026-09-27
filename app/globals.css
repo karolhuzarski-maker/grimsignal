@@ -1863,3 +1863,48 @@ footer {
     text-align: left;
   }
 }
+
+
+/* Persistent close control for expanded GABRIEL preview */
+.gabriel-sticky-close {
+  position: fixed;
+  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 15px;
+  border: 1px solid rgba(221,74,84,.72);
+  background: rgba(8,11,14,.94);
+  color: white;
+  box-shadow: 0 10px 34px rgba(0,0,0,.34);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.gabriel-sticky-close:hover,
+.gabriel-sticky-close:focus-visible {
+  background: var(--red);
+  border-color: var(--red);
+  outline: 0;
+}
+
+.gabriel-sticky-close span {
+  font-size: 13px;
+  line-height: 1;
+}
+
+@media (max-width: 620px) {
+  .gabriel-sticky-close {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    min-height: 42px;
+    padding: 0 13px;
+    font-size: 7px;
+  }
+}
