@@ -57,14 +57,10 @@ const packs = [
 ];
 
 const researchAreas = [
-  "Crisis AI validation",
-  "RGB / thermal multimodal research",
-  "AI performance degradation",
-  "Human detection in degraded environments",
-  "UAV and ground sensor fusion",
-  "Real-world benchmarking",
-  "UAS / C-UxS perception & real-world validation",
-  "Physical AI for SAR and disaster response",
+  "Crisis AI & computer vision",
+  "RGB / thermal / multisensor data",
+  "UAV & Physical AI",
+  "Field validation & edge-case benchmarking",
 ];
 
 function Arrow() {
@@ -226,13 +222,30 @@ export default function Home() {
           </p>
         </div>
         <ul className="research-list">
-          {researchAreas.map((area, index) => (
-            <li key={area}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              {area}
-            </li>
+          {researchAreas.map((area) => (
+            <li key={area}>{area}</li>
           ))}
         </ul>
+
+        <a className="gabriel-teaser" href="./rd/gabriel-one/" aria-label="Open GABRIEL ONE Research Preview">
+          <div className="gabriel-teaser-image">
+            <img
+              src="/gabriel-one-hero.webp"
+              alt="GABRIEL ONE - drone-assisted casualty tracking research preview"
+              width="600"
+              height="750"
+            />
+          </div>
+          <div className="gabriel-teaser-copy">
+            <div className="section-kicker light">ACTIVE R&amp;D PROGRAM</div>
+            <h3>GABRIEL <em>ONE</em></h3>
+            <p>
+              Experimental UAV-assisted casualty tracking and reassessment support
+              for complex incidents.
+            </p>
+            <span>ENTER RESEARCH PREVIEW ↗</span>
+          </div>
+        </a>
       </section>
 
       <ContactBrief />
