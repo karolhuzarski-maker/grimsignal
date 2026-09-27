@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "UAV-assisted casualty tracking and reassessment support for complex incidents.",
     images: [
       {
-        url: "/gabriel-one-hero.webp",
+        url: "/og.png",
         width: 600,
         height: 750,
         alt: "GABRIEL ONE research preview by GRIM SIGNAL LABS",
@@ -73,11 +73,11 @@ export default function GabrielOnePage() {
 
         <a
           className="gabriel-poster"
-          href="/gabriel-one-hero.webp"
+          href="/gabriel-one-hero.svg"
           aria-label="Open the GABRIEL ONE research preview key visual"
         >
           <img
-            src="/gabriel-one-hero.webp"
+            src="/gabriel-one-hero.svg"
             alt="GABRIEL ONE - drone-assisted casualty tracking research preview"
             width="600"
             height="750"

@@ -63,6 +63,21 @@ const researchAreas = [
   "Field validation & edge-case benchmarking",
 ];
 
+const gabrielWorkflow = [
+  ["OBSERVE", "Detect or confirm a casualty from the aerial view."],
+  ["ASSIGN ID", "Maintain a simple persistent reference such as P01, P02 or P03."],
+  ["REMEMBER", "Retain the previous observation instead of treating every frame as a new event."],
+  ["REASSESS", "Bring the casualty back to the operator's attention when another look is required."],
+  ["UPDATE", "Record the new observation and continue the operational picture."],
+];
+
+const gabrielResearch = [
+  "Continuity of casualty identity across repeated UAV observations",
+  "Operator workload and reassessment prompts in complex scenes",
+  "Performance under occlusion, movement and degraded visibility",
+  "Field validation against known ground truth",
+];
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -227,13 +242,13 @@ export default function Home() {
           ))}
         </ul>
 
-        <a className="gabriel-teaser" href="./rd/gabriel-one/" aria-label="Open GABRIEL ONE Research Preview">
+        <a className="gabriel-teaser gabriel-preview-trigger" href="#gabriel-preview" aria-label="Expand GABRIEL ONE Research Preview">
           <div className="gabriel-teaser-image">
             <img
-              src="/gabriel-one-hero.webp"
+              src="/gabriel-one-hero.svg"
               alt="GABRIEL ONE - drone-assisted casualty tracking research preview"
-              width="600"
-              height="750"
+              width="800"
+              height="1000"
             />
           </div>
           <div className="gabriel-teaser-copy">
@@ -243,9 +258,123 @@ export default function Home() {
               Experimental UAV-assisted casualty tracking and reassessment support
               for complex incidents.
             </p>
-            <span>ENTER RESEARCH PREVIEW ↗</span>
+            <span>OPEN RESEARCH PREVIEW ↓</span>
           </div>
         </a>
+      </section>
+
+      <section className="gabriel-inline-preview" id="gabriel-preview" aria-label="GABRIEL ONE Research Preview">
+        <div className="gabriel-inline-shell">
+          <div className="gabriel-inline-rail">
+            <span>GABRIEL ONE</span>
+            <span>RESEARCH PREVIEW</span>
+            <span>ACTIVE DEVELOPMENT</span>
+          </div>
+
+          <div className="gabriel-inline-content">
+            <div className="gabriel-inline-topbar">
+              <div>
+                <div className="section-kicker light">GRIM SIGNAL LABS / R&amp;D</div>
+                <h2>GABRIEL <em>ONE</em></h2>
+              </div>
+              <a className="gabriel-close" href="#research" aria-label="Close GABRIEL ONE preview">CLOSE ×</a>
+            </div>
+
+            <div className="gabriel-inline-hero">
+              <div>
+                <p className="gabriel-inline-lead">
+                  UAV-assisted casualty tracking and reassessment support for complex incidents.
+                </p>
+                <p className="gabriel-inline-question">
+                  A drone can find a casualty. What happens five minutes later?
+                </p>
+                <div className="gabriel-statusline">
+                  <span>RESEARCH PREVIEW</span>
+                  <span>ACTIVE DEVELOPMENT</span>
+                  <span>LIMITED ACCESS</span>
+                </div>
+              </div>
+              <img
+                src="/gabriel-one-hero.svg"
+                alt="GABRIEL ONE research preview key visual"
+                width="800"
+                height="1000"
+              />
+            </div>
+
+            <div className="gabriel-inline-block">
+              <div className="section-kicker light">THE QUESTION</div>
+              <div>
+                <h3>Detection is only the first observation.</h3>
+                <p>
+                  In a complex incident, an aerial team may identify several casualties quickly.
+                  GABRIEL ONE explores how an operator can retain continuity between observations:
+                  who has already been seen, what was observed, and who needs another look.
+                </p>
+              </div>
+            </div>
+
+            <div className="gabriel-inline-block gabriel-loop-block">
+              <div className="section-kicker light">CORE LOOP</div>
+              <div>
+                <h3>Observe. Remember. Return.</h3>
+                <ol className="gabriel-inline-loop">
+                  {gabrielWorkflow.map(([title, text], index) => (
+                    <li key={title}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <strong>{title}</strong>
+                      <p>{text}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+
+            <div className="gabriel-inline-signal">
+              <article>
+                <small>P01</small>
+                <strong>OBSERVED</strong>
+                <span>Previous observation retained</span>
+              </article>
+              <article className="is-alert">
+                <small>P02</small>
+                <strong>REASSESSMENT REQUIRED</strong>
+                <span>Return to casualty</span>
+              </article>
+              <article>
+                <small>P03</small>
+                <strong>STATUS UPDATED</strong>
+                <span>Operational picture continues</span>
+              </article>
+            </div>
+
+            <div className="gabriel-inline-block">
+              <div className="section-kicker light">CURRENT RESEARCH FOCUS</div>
+              <ul className="gabriel-inline-focus">
+                {gabrielResearch.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+
+            <div className="gabriel-inline-access">
+              <div>
+                <div className="section-kicker">EARLY ACCESS / FIELD PARTNERS</div>
+                <h3>Bring us a real operational problem.</h3>
+                <p>
+                  We are looking for UAV operators, SAR teams, EMS, disaster-response groups,
+                  robotics teams and research partners willing to challenge the concept with
+                  practical field feedback.
+                </p>
+              </div>
+              <a
+                className="button button-primary"
+                href="mailto:echo@grimsignallabs.com?subject=GABRIEL%20ONE%20-%20Early%20Access&body=Organization%3A%0ACountry%3A%0AUse%20case%3A%0AUAV%20platform%3A%0A"
+              >
+                Request early access <Arrow />
+              </a>
+              <small>EXPERIMENTAL R&amp;D CONCEPT / OPERATOR SUPPORT / NO AUTONOMOUS TRIAGE DECISIONS</small>
+            </div>
+          </div>
+        </div>
       </section>
 
       <ContactBrief />
