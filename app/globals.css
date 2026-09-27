@@ -1748,3 +1748,118 @@ footer {
     gap: 12px;
   }
 }
+
+
+/* GABRIEL ONE - compact mobile/readability tuning */
+.gabriel-inline-hero-text h2 {
+  font-size: clamp(48px, 6.3vw, 86px);
+  line-height: .88;
+  max-width: 860px;
+}
+
+.gabriel-inline-hero-text .gabriel-inline-lead {
+  max-width: 760px;
+  font-size: clamp(17px, 1.65vw, 23px);
+  line-height: 1.55;
+}
+
+.gabriel-inline-content {
+  padding-top: clamp(44px, 6vw, 86px);
+}
+
+.gabriel-system-thesis {
+  margin-top: clamp(52px, 7vw, 88px);
+}
+
+.gabriel-inline-block {
+  margin-top: clamp(58px, 7vw, 94px);
+}
+
+.gabriel-inline-signal {
+  margin-top: clamp(52px, 7vw, 88px);
+}
+
+.gabriel-vision {
+  margin-top: clamp(62px, 8vw, 110px);
+}
+
+.gabriel-close-bottom {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 18px 0 0;
+  border-left: 0;
+  border-top: 1px solid rgba(255,255,255,.28);
+  color: white;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+@media (max-width: 620px) {
+  .gabriel-inline-content {
+    padding-top: 40px;
+  }
+
+  .gabriel-inline-topbar {
+    padding-bottom: 18px;
+  }
+
+  .gabriel-inline-hero.gabriel-inline-hero-text {
+    margin-top: 38px;
+  }
+
+  .gabriel-inline-hero-text h2 {
+    font-size: clamp(44px, 13.5vw, 62px);
+    line-height: .9;
+    letter-spacing: -.055em;
+    max-width: 100%;
+    margin-bottom: 26px;
+  }
+
+  .gabriel-inline-hero-text h2::after {
+    width: 72px;
+    margin-top: 22px;
+  }
+
+  .gabriel-inline-hero-text .gabriel-inline-lead {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .gabriel-statusline {
+    margin-top: 22px;
+  }
+
+  .gabriel-system-thesis {
+    margin-top: 44px;
+  }
+
+  .gabriel-system-thesis article {
+    min-height: 170px;
+    padding: 22px;
+  }
+
+  .gabriel-inline-block {
+    margin-top: 48px;
+    padding-top: 22px;
+  }
+
+  .gabriel-inline-signal {
+    margin-top: 46px;
+  }
+
+  .gabriel-vision {
+    margin-top: 54px;
+  }
+
+  .gabriel-inline-access {
+    margin-top: 58px;
+  }
+
+  .gabriel-close-bottom {
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 20px;
+    text-align: left;
+  }
+}
