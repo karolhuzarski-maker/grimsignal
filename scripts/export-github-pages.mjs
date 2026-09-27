@@ -14,6 +14,23 @@ const [owner, repositoryName] = repository.split("/");
 const productionUrl = `https://${owner}.github.io/${repositoryName}`;
 const assetVersion = (process.env.GITHUB_SHA ?? "local").slice(0, 12);
 
+const staticAssets = [
+  "grim-signal-labs-logo.png",
+  "grim-uav-hero.webp",
+  "gsl-hero-field.webp",
+  "gsl-mci-multiview-01.webp",
+  "gsl-capabilities-thermal.webp",
+  "gabriel-one-hero.webp",
+  "og.png",
+  "favicon.svg",
+  "script.js",
+  "gsl-field-sample.mp4",
+  "gsl-field-video-poster.webp",
+  "gsl-field-wide.webp",
+  "gsl-field-team.webp",
+  "gsl-field-close.webp",
+];
+
 async function restoreBase64Asset(partsRelativePath, outputName, minimumBytes = 1) {
   const partsDirectory = path.join(projectRoot, partsRelativePath);
   const parts = (await readdir(partsDirectory))
@@ -37,6 +54,47 @@ async function restoreBase64Asset(partsRelativePath, outputName, minimumBytes = 
   console.log(`Restored ${outputName}: ${bytes.length} bytes from ${parts.length} chunks`);
 }
 
+function rewriteAssetReferences(html, assetPrefix) {
+  let rewritten = html.replaceAll(
+    "https://grim-signal-labs.karhuz.chatgpt.site",
+    productionUrl,
+  );
+
+  for (const asset of staticAssets) {
+    rewritten = rewritten
+      .replaceAll(`src="/${asset}"`, `src="${assetPrefix}${asset}"`)
+      .replaceAll(`href="/${asset}"`, `href="${assetPrefix}${asset}"`);
+  }
+
+  return rewritten;
+}
+
+function prepareStaticHtml(html, assetPrefix) {
+  const documentEnd = html.indexOf("</html>");
+
+  if (documentEnd === -1) {
+    throw new Error("Static render did not return a complete HTML document.");
+  }
+
+  return rewriteAssetReferences(
+    html
+      .slice(0, documentEnd + "</html>".length)
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+      .replace(/<link\b[^>]*rel=["']modulepreload["'][^>]*>/gi, "")
+      .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*>/gi, "")
+      .replace(/<link\b[^>]*rel=["']preload["'][^>]*>/gi, ""),
+    assetPrefix,
+  )
+    .replace(
+      "</head>",
+      `<link rel="stylesheet" href="${assetPrefix}styles.css?v=${assetVersion}"/><link rel="icon" href="${assetPrefix}favicon.svg"/></head>`,
+    )
+    .replace(
+      "</body>",
+      `<script src="${assetPrefix}script.js" defer></script></body>`,
+    );
+}
+
 await rm(outputDirectory, { recursive: true, force: true });
 await mkdir(outputDirectory, { recursive: true });
 
@@ -44,47 +102,34 @@ const workerUrl = pathToFileURL(serverEntry);
 workerUrl.searchParams.set("static-export", `${process.pid}-${Date.now()}`);
 const { default: worker } = await import(workerUrl.href);
 
-const response = await worker.fetch(
-  new Request("http://localhost/", { headers: { accept: "text/html" } }),
-  {
-    ASSETS: {
-      fetch: async () => new Response("Not found", { status: 404 }),
+async function renderPage(pathname, outputRelativePath, assetPrefix) {
+  const response = await worker.fetch(
+    new Request(`http://localhost${pathname}`, { headers: { accept: "text/html" } }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
     },
-  },
-  {
-    waitUntil() {},
-    passThroughOnException() {},
-  },
-);
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
 
-if (!response.ok) {
-  throw new Error(`Static render failed with status ${response.status}.`);
+  if (!response.ok) {
+    throw new Error(`Static render failed for ${pathname} with status ${response.status}.`);
+  }
+
+  const html = prepareStaticHtml(await response.text(), assetPrefix);
+  const destination = path.join(outputDirectory, outputRelativePath);
+
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, html);
+  console.log(`Rendered ${pathname} -> ${outputRelativePath}`);
 }
 
-let html = await response.text();
-const documentEnd = html.indexOf("</html>");
-
-if (documentEnd === -1) {
-  throw new Error("Static render did not return a complete HTML document.");
-}
-
-html = html.slice(0, documentEnd + "</html>".length);
-html = html
-  .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
-  .replace(/<link\b[^>]*rel=["']modulepreload["'][^>]*>/gi, "")
-  .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*>/gi, "")
-  .replace(/<link\b[^>]*rel=["']preload["'][^>]*>/gi, "")
-  .replaceAll("https://grim-signal-labs.karhuz.chatgpt.site", productionUrl)
-  .replaceAll('src="/grim-signal-labs-logo.png"', 'src="./grim-signal-labs-logo.png"')
-  .replaceAll('href="/grim-signal-labs-logo.png"', 'href="./grim-signal-labs-logo.png"')
-  .replaceAll('src="/grim-uav-hero.webp"', 'src="./grim-uav-hero.webp"')
-  .replaceAll('src="/gsl-hero-field.webp"', 'src="./gsl-hero-field.webp"')
-  .replaceAll('src="/gsl-mci-multiview-01.webp"', 'src="./gsl-mci-multiview-01.webp"')
-  .replace(
-    "</head>",
-    `<link rel="stylesheet" href="./styles.css?v=${assetVersion}"/><link rel="icon" href="./favicon.svg"/></head>`,
-  )
-  .replace("</body>", '<script src="./script.js" defer></script></body>');
+await renderPage("/", "index.html", "./");
+await renderPage("/rd/gabriel-one", "rd/gabriel-one/index.html", "../../");
 
 const clientFiles = await readdir(path.join(clientDirectory, "assets"));
 const stylesheet = clientFiles.find((file) => file.endsWith(".css"));
@@ -93,27 +138,12 @@ if (!stylesheet) {
   throw new Error("The production build did not generate a stylesheet.");
 }
 
-await writeFile(path.join(outputDirectory, "index.html"), html);
 await cp(
   path.join(clientDirectory, "assets", stylesheet),
   path.join(outputDirectory, "styles.css"),
 );
 
-for (const asset of [
-  "grim-signal-labs-logo.png",
-  "grim-uav-hero.webp",
-  "gsl-hero-field.webp",
-  "gsl-mci-multiview-01.webp",
-  "gsl-capabilities-thermal.webp",
-  "og.png",
-  "favicon.svg",
-  "script.js",
-  "gsl-field-sample.mp4",
-  "gsl-field-video-poster.webp",
-  "gsl-field-wide.webp",
-  "gsl-field-team.webp",
-  "gsl-field-close.webp",
-]) {
+for (const asset of staticAssets) {
   await cp(path.join(publicDirectory, asset), path.join(outputDirectory, asset));
 }
 
