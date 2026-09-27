@@ -250,15 +250,39 @@ export default function Home() {
               width="800"
               height="1000"
             />
+            <div className="gabriel-teaser-image-label">
+              <span>R&amp;D / 01</span>
+              <span>FIELD SYSTEM CONCEPT</span>
+            </div>
           </div>
           <div className="gabriel-teaser-copy">
-            <div className="section-kicker light">ACTIVE R&amp;D PROGRAM</div>
-            <h3>GABRIEL <em>ONE</em></h3>
-            <p>
-              Experimental UAV-assisted casualty tracking and reassessment support
-              for complex incidents.
+            <div className="gabriel-teaser-meta">
+              <span>GRIM SIGNAL LABS / ACTIVE R&amp;D</span>
+              <span className="gabriel-teaser-live"><i /> ACTIVE DEVELOPMENT</span>
+            </div>
+
+            <h3><span>GABRIEL</span><em>ONE</em></h3>
+
+            <p className="gabriel-teaser-kicker">
+              Temporal scene memory for UAV casualty reassessment.
             </p>
-            <span>OPEN RESEARCH PREVIEW ↓</span>
+            <p className="gabriel-teaser-summary">
+              An experimental operator-support layer designed to remember observed casualties,
+              preserve context between passes and bring the right person back into focus when
+              another look matters.
+            </p>
+
+            <div className="gabriel-teaser-tags" aria-label="GABRIEL ONE research themes">
+              <span>ENTITY MEMORY</span>
+              <span>TEMPORAL STATE</span>
+              <span>REVISIT LOGIC</span>
+              <span>HUMAN CONTROL</span>
+            </div>
+
+            <div className="gabriel-teaser-cta">
+              <span>ENTER RESEARCH PREVIEW</span>
+              <strong aria-hidden="true">↓</strong>
+            </div>
           </div>
         </a>
       </section>
