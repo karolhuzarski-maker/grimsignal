@@ -275,6 +275,11 @@ export default function Home() {
               another look matters.
             </p>
 
+            <p className="gabriel-teaser-symbolic">
+              What the sky has seen,<br />
+              the ground must remember.
+            </p>
+
             <div className="gabriel-teaser-tags" aria-label="GABRIEL ONE research themes">
               <span>ENTITY MEMORY</span>
               <span>TEMPORAL STATE</span>

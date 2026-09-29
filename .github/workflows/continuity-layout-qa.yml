@@ -33,6 +33,31 @@ jobs:
               const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
               await page.goto('http://127.0.0.1:8765/', { waitUntil: 'load' });
               await page.addStyleTag({ content: 'html { scroll-behavior:auto !important } *,*::before,*::after { animation:none !important; transition:none !important }' });
+              const teaser = page.locator('.gabriel-teaser');
+              const teaserMetrics = await page.evaluate(() => {
+                const copy = document.querySelector('.gabriel-teaser-copy');
+                const heading = copy.querySelector('h3');
+                const boundary = copy.getBoundingClientRect();
+                const range = document.createRange();
+                const textRects = [...heading.querySelectorAll('span,em')].flatMap(el => {
+                  range.selectNodeContents(el);
+                  return [...range.getClientRects()].map(r => ({ left:r.left, right:r.right }));
+                });
+                const symbolic = copy.querySelector('.gabriel-teaser-symbolic');
+                return {
+                  font: getComputedStyle(heading).fontSize,
+                  copyWidth: boundary.width,
+                  titleFits: textRects.every(r => r.left >= boundary.left-1 && r.right <= boundary.right+1),
+                  symbolicText: symbolic.innerText.split(String.fromCharCode(10)).join(' ').trim(),
+                  documentWidth: document.documentElement.scrollWidth,
+                  viewport:innerWidth
+                };
+              });
+              if (!teaserMetrics.titleFits || teaserMetrics.documentWidth > width + 1) failures.push({ width, teaser:teaserMetrics });
+              if ([320,390,1440].includes(width)) {
+                await teaser.screenshot({ path: 'layout-proof/teaser-' + width + '.png' });
+                await page.locator('.gabriel-teaser-copy').screenshot({ path: 'layout-proof/teaser-copy-' + width + '.png' });
+              }
               await page.locator('.gabriel-preview-trigger').click();
               const section = page.locator('#gabriel-preview');
               await section.waitFor({ state: 'visible' });
@@ -69,7 +94,7 @@ jobs:
               await page.locator('.gabriel-sticky-close').click();
               const closed = await section.isHidden();
               if (!closed) failures.push({ width, closeFailed: true });
-              results.push({ width, ...measured, closed });
+              results.push({ width, teaser:teaserMetrics, ...measured, closed });
               await page.close();
             }
           } finally {
