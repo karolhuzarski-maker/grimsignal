@@ -1781,8 +1781,8 @@ footer {
 
 /* GABRIEL ONE - compact mobile/readability tuning */
 .gabriel-inline-hero-text h2 {
-  font-size: clamp(48px, 6.3vw, 86px);
-  line-height: .88;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: .98;
   max-width: 860px;
 }
 
@@ -1838,9 +1838,9 @@ footer {
   }
 
   .gabriel-inline-hero-text h2 {
-    font-size: clamp(44px, 13.5vw, 62px);
-    line-height: .9;
-    letter-spacing: -.055em;
+    font-size: clamp(28px, 8.5vw, 38px);
+    line-height: 1.04;
+    letter-spacing: -.04em;
     max-width: 100%;
     margin-bottom: 26px;
   }
