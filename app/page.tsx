@@ -235,6 +235,9 @@ export default function Home() {
             sensing, aerial perception, real-world benchmarking and AI performance
             under operational stress.
           </p>
+          <p className="research-cooperation">
+            <strong>U.S. R&amp;D COOPERATION</strong> - Our research program is developed in cooperation with a U.S.-based partner, supporting U.S. operational context and future transition.
+          </p>
         </div>
         <ul className="research-list">
           {researchAreas.map((area) => (
@@ -451,6 +454,7 @@ export default function Home() {
           <span>VAT ID: PL6922069523</span>
           <span>KRAKÓW, POLAND / EU</span>
           <span>© 2026 GRIM SIGNAL LABS</span>
+          <span className="footer-cooperation">R&amp;D COOPERATION / POLAND + UNITED STATES</span>
         </div>
       </footer>
     </main>

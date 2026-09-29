@@ -216,6 +216,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .research { background:var(--ink-2); color:white; display:grid; grid-template-columns:.75fr 1fr; gap:clamp(60px,9vw,150px); align-items:start; }
 .research h2 { margin:22px 0 30px; text-transform:uppercase; font-size:var(--section-title-size); letter-spacing:-.045em; line-height:.96; font-weight:900; }
 .research-copy > p { margin:0; max-width:620px; color:rgba(255,255,255,.56); font-size:16px; line-height:1.75; }
+.research-copy > .research-cooperation { margin-top:28px; padding-top:22px; border-top:1px solid rgba(255,255,255,.13); font-size:14px; line-height:1.7; }
+.research-cooperation strong { color:#dd4a54; font-size:10px; font-weight:700; letter-spacing:.08em; }
 .research-list { list-style:none; padding:0; margin:0; border-top:1px solid rgba(255,255,255,.13); }
 .research-list li { padding:19px 0; border-bottom:1px solid rgba(255,255,255,.13); display:grid; grid-template-columns:70px 1fr; gap:20px; text-transform:uppercase; font-size:11px; letter-spacing:.08em; }
 .research-list li span { color:#dd4a54; font-size:8px; }
@@ -637,6 +639,14 @@ footer {
   color: var(--ink);
   font-size: 12px;
   font-weight: 800;
+}
+
+.footer-cooperation {
+  grid-column: 1 / -1;
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
 }
 
 @keyframes brief-open {
