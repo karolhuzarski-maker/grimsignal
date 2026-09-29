@@ -1,0 +1,86 @@
+name: Check Gabriel continuity layout
+on:
+  push:
+    branches: [codex/gabriel-continuity-mobile-20260929]
+permissions:
+  contents: read
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npm run build && npm run export:pages
+      - run: npm install --no-save --package-lock=false playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Check mobile and desktop layouts
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory docs > /tmp/layout-server.log 2>&1 &
+          node --input-type=module <<'JS'
+          import { chromium } from 'playwright';
+          import { mkdir, writeFile } from 'node:fs/promises';
+          await mkdir('layout-proof', { recursive: true });
+          const browser = await chromium.launch({ headless: true });
+          const results = [];
+          const failures = [];
+          try {
+            for (const width of [320, 360, 390, 430, 620, 768, 860, 1024, 1440]) {
+              const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+              await page.goto('http://127.0.0.1:8765/', { waitUntil: 'load' });
+              await page.addStyleTag({ content: 'html { scroll-behavior:auto !important } *,*::before,*::after { animation:none !important; transition:none !important }' });
+              await page.locator('.gabriel-preview-trigger').click();
+              const section = page.locator('#gabriel-preview');
+              await section.waitFor({ state: 'visible' });
+              const measured = await page.evaluate(() => {
+                const section = document.querySelector('#gabriel-preview');
+                const heading = section.querySelector('.gabriel-inline-hero-text h2');
+                const rect = heading.getBoundingClientRect();
+                const lines = [...heading.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).flatMap(n => {
+                  const range = document.createRange();
+                  range.selectNodeContents(n);
+                  return [...range.getClientRects()].map(r => ({ left: r.left, right: r.right }));
+                });
+                const overflow = [...section.querySelectorAll('*')].filter(el => {
+                  const r = el.getBoundingClientRect();
+                  return r.width > 0 && r.height > 0 && (r.left < -1 || r.right > innerWidth + 1);
+                }).map(el => ({ cls: el.className, text: (el.textContent || '').trim().slice(0, 60) }));
+                return {
+                  font: getComputedStyle(heading).fontSize,
+                  headingHeight: rect.height,
+                  lines,
+                  sectionWidth: section.clientWidth,
+                  sectionScrollWidth: section.scrollWidth,
+                  documentWidth: document.documentElement.scrollWidth,
+                  viewport: innerWidth,
+                  overflow
+                };
+              });
+              if (measured.sectionScrollWidth > measured.sectionWidth + 1 || measured.lines.some(r => r.left < -1 || r.right > width + 1) || measured.overflow.length) {
+                failures.push({ width, ...measured });
+              }
+              if ([320, 390, 1440].includes(width)) {
+                await section.screenshot({ path: 'layout-proof/expanded-' + width + '.png' });
+              }
+              await page.locator('.gabriel-sticky-close').click();
+              const closed = await section.isHidden();
+              if (!closed) failures.push({ width, closeFailed: true });
+              results.push({ width, ...measured, closed });
+              await page.close();
+            }
+          } finally {
+            await browser.close();
+            await writeFile('layout-proof/results.json', JSON.stringify({ results, failures }, null, 2));
+          }
+          console.log(JSON.stringify({ results, failures }, null, 2));
+          if (failures.length) process.exit(1);
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gabriel-layout-proof
+          path: layout-proof
