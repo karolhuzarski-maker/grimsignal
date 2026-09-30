@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">JUDAS FIELD research visual</title>
+  <desc id="desc">A pale desert field seen from above with the long shadow of a robed observer, the shadow of a quadcopter drone and a small incident cluster marked by subtle red targeting graphics.</desc>
+  <defs>
+    <linearGradient id="sand" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d9c29d"/>
+      <stop offset=".48" stop-color="#b99a70"/>
+      <stop offset="1" stop-color="#8f7352"/>
+    </linearGradient>
+    <radialGradient id="light" cx=".68" cy=".24" r=".82">
+      <stop offset="0" stop-color="#f3dfb7" stop-opacity=".72"/>
+      <stop offset=".52" stop-color="#f3dfb7" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".18"/>
+    </radialGradient>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0V72" fill="none" stroke="#1b1712" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+    <filter id="shadowBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence baseFrequency=".72" numOctaves="3" seed="8" type="fractalNoise" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono">
+        <feFuncA type="table" tableValues="0 .12"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#sand)"/>
+  <rect width="1200" height="800" fill="url(#light)"/>
+  <rect width="1200" height="800" fill="url(#grid)" opacity=".48"/>
+  <rect width="1200" height="800" filter="url(#grain)" opacity=".55"/>
+
+  <g opacity=".26" fill="#382f25">
+    <path d="M33 146l94-25 32 18-18 48-88 7z"/>
+    <path d="M1087 92l67 12 20 46-41 33-78-11-25-35z"/>
+    <path d="M1020 665l122-24 32 63-84 52-115-17z"/>
+    <path d="M82 644l86-30 55 34-16 64-112 17z"/>
+    <circle cx="960" cy="220" r="9"/><circle cx="885" cy="585" r="7"/><circle cx="285" cy="126" r="6"/>
+  </g>
+
+  <!-- long robed human shadow -->
+  <g fill="#08090a" opacity=".86" filter="url(#shadowBlur)">
+    <ellipse cx="285" cy="116" rx="49" ry="58"/>
+    <path d="M244 159c25-20 64-21 87 0l58 132 105 315-57 22-84-197-46-91-23 96-73 209-74-20 73-312z"/>
+    <path d="M223 191l-112 296 42 18 122-254z"/>
+    <path d="M327 183l92 188 39-20-80-205z"/>
+  </g>
+
+  <!-- drone shadow -->
+  <g transform="translate(815 205) rotate(10)" fill="#08090a" opacity=".82" filter="url(#shadowBlur)">
+    <rect x="-26" y="-34" width="52" height="68" rx="12"/>
+    <rect x="-7" y="-92" width="14" height="184" rx="7"/>
+    <rect x="-112" y="-7" width="224" height="14" rx="7"/>
+    <circle cx="-112" cy="0" r="47"/><circle cx="112" cy="0" r="47"/>
+    <circle cx="0" cy="-92" r="47"/><circle cx="0" cy="92" r="47"/>
+    <circle cx="-112" cy="0" r="33" fill="#b99a70" opacity=".23"/>
+    <circle cx="112" cy="0" r="33" fill="#b99a70" opacity=".23"/>
+    <circle cx="0" cy="-92" r="33" fill="#b99a70" opacity=".23"/>
+    <circle cx="0" cy="92" r="33" fill="#b99a70" opacity=".23"/>
+  </g>
+
+  <!-- incident cluster -->
+  <g fill="#111" opacity=".88">
+    <g transform="translate(895 595)"><circle cy="-11" r="8"/><path d="M-6 0h12l7 32H-13z"/></g>
+    <g transform="translate(948 625)"><circle cy="-11" r="8"/><path d="M-6 0h12l7 32H-13z"/></g>
+    <g transform="translate(1004 590)"><circle cy="-11" r="8"/><path d="M-6 0h12l7 32H-13z"/></g>
+    <g transform="translate(1056 636)"><circle cy="-11" r="8"/><path d="M-6 0h12l7 32H-13z"/></g>
+    <g transform="translate(1102 584)"><circle cy="-11" r="8"/><path d="M-6 0h12l7 32H-13z"/></g>
+    <path d="M957 681c28-11 65-6 84 13l-20 23h-63l-24-15z"/>
+  </g>
+
+  <!-- sparse AI markers -->
+  <g fill="none" stroke="#c5222e" stroke-width="2" opacity=".84">
+    <path d="M850 548h22m-11-11v22"/>
+    <path d="M1081 543h22m-11-11v22"/>
+    <path d="M930 660h-19v-19m0 0h19m98 72h19v-19m0 0h-19"/>
+    <path d="M875 566h36v48h-36z"/>
+    <path d="M987 554h36v48h-36z"/>
+    <circle cx="761" cy="358" r="86" opacity=".35"/>
+    <circle cx="761" cy="358" r="48" opacity=".3"/>
+    <path d="M651 358h66m88 0h66M761 248v66m0 88v66"/>
+  </g>
+
+  <g fill="#c5222e">
+    <circle cx="761" cy="358" r="5"/>
+    <circle cx="861" cy="548" r="3"/>
+    <circle cx="1092" cy="543" r="3"/>
+  </g>
+
+  <g font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="4" fill="#1b1712" opacity=".58">
+    <text x="58" y="62">JUDAS FIELD / REAL-WORLD VALIDATION</text>
+    <text x="58" y="86" font-size="10" letter-spacing="3">GROUND TRUTH / EDGE CASES / SENSOR FAILURE</text>
+  </g>
+
+  <g stroke="#c5222e" stroke-width="3">
+    <path d="M58 108h38"/>
+  </g>
+</svg>

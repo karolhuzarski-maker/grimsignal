@@ -245,6 +245,30 @@ export default function Home() {
           ))}
         </ul>
 
+        <div className="rd-systems-head">
+          <div>
+            <div className="section-kicker light">ACTIVE R&amp;D SYSTEMS</div>
+            <h3>Two systems. Two different questions.</h3>
+          </div>
+          <p>
+            Experimental GRIM SIGNAL LABS systems under active development. Public previews
+            show the operational problem and research direction while implementation details remain undisclosed.
+          </p>
+        </div>
+
+        <div className="rd-system-index" aria-label="GRIM SIGNAL LABS active R&D systems">
+          <a href="#gabriel-preview">
+            <small>01 / OPERATIONAL INTELLIGENCE</small>
+            <strong>GABRIEL ONE</strong>
+            <span>Observe. Remember. Return.</span>
+          </a>
+          <a href="#judas-preview">
+            <small>02 / AI ASSURANCE</small>
+            <strong>JUDAS FIELD</strong>
+            <span>Models meet reality. Trust gets tested.</span>
+          </a>
+        </div>
+
         <a className="gabriel-teaser gabriel-preview-trigger" href="#gabriel-preview" aria-label="Expand GABRIEL ONE Research Preview">
           <div className="gabriel-teaser-image">
             <img
@@ -285,6 +309,54 @@ export default function Home() {
               <span>TEMPORAL STATE</span>
               <span>REVISIT LOGIC</span>
               <span>HUMAN CONTROL</span>
+            </div>
+
+            <div className="gabriel-teaser-cta">
+              <span>ENTER RESEARCH PREVIEW</span>
+              <strong aria-hidden="true">↓</strong>
+            </div>
+          </div>
+        </a>
+
+        <a className="gabriel-teaser judas-teaser" href="#judas-preview" aria-label="Expand JUDAS FIELD Research Preview">
+          <div className="gabriel-teaser-image judas-teaser-image">
+            <img
+              src="/judas-field-hero.svg"
+              alt="JUDAS FIELD - real-world Physical AI validation research preview"
+              width="1200"
+              height="800"
+            />
+            <div className="gabriel-teaser-image-label">
+              <span>R&amp;D / 02</span>
+              <span>REAL-WORLD VALIDATION</span>
+            </div>
+          </div>
+          <div className="gabriel-teaser-copy judas-teaser-copy">
+            <div className="gabriel-teaser-meta">
+              <span>GRIM SIGNAL LABS / ACTIVE R&amp;D</span>
+              <span className="gabriel-teaser-live"><i /> ACTIVE DEVELOPMENT</span>
+            </div>
+
+            <h3><span>JUDAS</span><em>FIELD</em></h3>
+
+            <p className="gabriel-teaser-kicker">
+              Real-world validation for Physical AI.
+            </p>
+            <p className="gabriel-teaser-summary">
+              An experimental field-validation environment designed to expose where AI perception
+              begins to fail under realistic operating conditions.
+            </p>
+
+            <p className="gabriel-teaser-symbolic">
+              Models meet reality.<br />
+              Trust gets tested.
+            </p>
+
+            <div className="gabriel-teaser-tags" aria-label="JUDAS FIELD research themes">
+              <span>GROUND TRUTH</span>
+              <span>EDGE CASES</span>
+              <span>SENSOR FAILURE</span>
+              <span>STRESS TESTING</span>
             </div>
 
             <div className="gabriel-teaser-cta">
@@ -433,6 +505,92 @@ export default function Home() {
                 Request early access <Arrow />
               </a>
               <small>EXPERIMENTAL R&amp;D CONCEPT / OPERATOR SUPPORT / NO AUTONOMOUS TRIAGE DECISIONS</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="gabriel-inline-preview judas-inline-preview" id="judas-preview" aria-label="JUDAS FIELD Research Preview">
+        <a className="gabriel-close gabriel-sticky-close" href="#research" aria-label="Close JUDAS FIELD preview">
+          CLOSE <span aria-hidden="true">↑</span>
+        </a>
+        <div className="gabriel-inline-shell">
+          <div className="gabriel-inline-rail">
+            <span>JUDAS FIELD</span>
+            <span>RESEARCH PREVIEW</span>
+            <span>ACTIVE DEVELOPMENT</span>
+          </div>
+
+          <div className="gabriel-inline-content">
+            <div className="gabriel-inline-topbar">
+              <div>
+                <div className="section-kicker light">JUDAS FIELD / RESEARCH PREVIEW</div>
+                <span className="gabriel-inline-code">PHYSICAL AI / REAL-WORLD VALIDATION / FIELD ASSURANCE</span>
+              </div>
+            </div>
+
+            <div className="gabriel-inline-hero gabriel-inline-hero-text">
+              <div>
+                <h2>Where perception<br />meets reality.</h2>
+                <p className="gabriel-inline-lead">
+                  JUDAS FIELD explores how AI perception behaves when clean benchmarks give way
+                  to real terrain, imperfect sensing and operational complexity.
+                </p>
+                <div className="gabriel-statusline">
+                  <span>RESEARCH PREVIEW</span>
+                  <span>ACTIVE DEVELOPMENT</span>
+                  <span>LIMITED DISCLOSURE</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="gabriel-system-thesis judas-system-thesis">
+              <article>
+                <small>01 / GROUND TRUTH</small>
+                <strong>REALITY AS REFERENCE</strong>
+                <p>Evaluate system output against a verified physical scene rather than presentation-ready examples.</p>
+              </article>
+              <article>
+                <small>02 / EDGE CASES</small>
+                <strong>BEYOND CLEAN BENCHMARKS</strong>
+                <p>Challenge perception with conditions that are difficult to reproduce in conventional datasets.</p>
+              </article>
+              <article>
+                <small>03 / SENSOR FAILURE</small>
+                <strong>WHEN PERCEPTION DEGRADES</strong>
+                <p>Observe how system behaviour changes as sensing conditions become less reliable.</p>
+              </article>
+              <article>
+                <small>04 / STRESS TESTING</small>
+                <strong>FIND THE BREAKING POINT</strong>
+                <p>Explore where operational confidence begins to separate from physical reality.</p>
+              </article>
+            </div>
+
+            <div className="judas-disclosure">
+              <div className="section-kicker light">CURRENT DISCLOSURE LEVEL</div>
+              <p>
+                Public material describes the research problem and field-validation direction only.
+                Detailed test protocols, scoring architecture and implementation remain undisclosed during active development.
+              </p>
+            </div>
+
+            <div className="gabriel-inline-access judas-inline-access">
+              <div>
+                <div className="section-kicker">EARLY ACCESS / RESEARCH PARTNERS</div>
+                <h3>Bring us a system that needs to meet reality.</h3>
+                <p>
+                  We are interested in research and field partners working on UAV, robotics,
+                  computer vision and Physical AI systems that require realistic validation.
+                </p>
+              </div>
+              <a
+                className="button button-primary"
+                href="mailto:echo@grimsignallabs.com?subject=JUDAS%20FIELD%20-%20Research%20Partner&body=Organization%3A%0ACountry%3A%0ASystem%20or%20use%20case%3A%0A"
+              >
+                Contact the lab <Arrow />
+              </a>
+              <small>EXPERIMENTAL R&amp;D / FIELD VALIDATION / LIMITED TECHNICAL DISCLOSURE</small>
             </div>
           </div>
         </div>

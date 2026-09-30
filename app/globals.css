@@ -2248,3 +2248,191 @@ footer {
     font-size: 8px;
   }
 }
+
+
+/* ACTIVE R&D SYSTEMS / JUDAS FIELD */
+.rd-systems-head {
+  grid-column: 1 / -1;
+  margin-top: clamp(52px, 7vw, 96px);
+  padding-top: 28px;
+  display: grid;
+  grid-template-columns: .75fr 1fr;
+  gap: clamp(40px, 7vw, 110px);
+  border-top: 1px solid rgba(255,255,255,.14);
+  align-items: end;
+}
+
+.rd-systems-head h3 {
+  margin: 18px 0 0;
+  max-width: 720px;
+  text-transform: uppercase;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.rd-systems-head > p {
+  margin: 0;
+  max-width: 680px;
+  color: rgba(255,255,255,.46);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+.rd-system-index {
+  grid-column: 1 / -1;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.rd-system-index a {
+  min-height: 150px;
+  padding: 25px 28px;
+  display: flex;
+  flex-direction: column;
+  background: #0f1418;
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+.rd-system-index a:hover {
+  background: #12191e;
+  box-shadow: inset 0 -2px 0 var(--red);
+}
+
+.rd-system-index small {
+  color: #dd4a54;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.rd-system-index strong {
+  margin-top: auto;
+  font-size: 23px;
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+.rd-system-index span {
+  margin-top: 11px;
+  color: rgba(255,255,255,.42);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.judas-teaser {
+  margin-top: 18px;
+  border-color: rgba(197,34,46,.32);
+  background:
+    radial-gradient(circle at 22% 46%, rgba(188,151,103,.08), transparent 32%),
+    radial-gradient(circle at 78% 30%, rgba(197,34,46,.075), transparent 28%),
+    #090d10;
+}
+
+.judas-teaser:hover {
+  border-color: rgba(221,74,84,.9);
+}
+
+.judas-teaser-image {
+  background: #17130f;
+}
+
+.judas-teaser-image img {
+  object-position: center center;
+  filter: saturate(.78) contrast(1.08) brightness(.84);
+}
+
+.judas-teaser-image::before {
+  background:
+    linear-gradient(180deg, rgba(6,8,10,.02) 0%, rgba(6,8,10,.04) 52%, rgba(6,8,10,.74) 100%),
+    linear-gradient(90deg, rgba(8,10,12,.08), transparent 55%);
+}
+
+.judas-teaser-copy .gabriel-teaser-symbolic {
+  font-style: normal;
+  letter-spacing: .01em;
+}
+
+.judas-inline-preview {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(177,137,91,.06), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(197,34,46,.06), transparent 28%),
+    #080b0e;
+}
+
+.judas-inline-preview .gabriel-inline-rail {
+  background: #0c1013;
+}
+
+.judas-inline-preview .gabriel-inline-rail span:nth-child(2) {
+  color: #dd4a54;
+}
+
+.judas-system-thesis article {
+  background:
+    linear-gradient(180deg, rgba(188,151,103,.025), transparent 38%),
+    #0f1418;
+}
+
+.judas-disclosure {
+  margin-top: clamp(58px, 8vw, 100px);
+  padding: 28px 0 0;
+  display: grid;
+  grid-template-columns: .32fr 1fr;
+  gap: clamp(40px, 8vw, 120px);
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.judas-disclosure p {
+  max-width: 780px;
+  margin: 0;
+  color: rgba(255,255,255,.48);
+  font-size: 14px;
+  line-height: 1.76;
+}
+
+.judas-inline-access {
+  background:
+    radial-gradient(circle at 78% 50%, rgba(13,17,21,.24), transparent 35%),
+    #9f1f29;
+}
+
+@media (max-width: 860px) {
+  .rd-systems-head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .rd-system-index {
+    grid-template-columns: 1fr;
+  }
+
+  .rd-system-index a {
+    min-height: 132px;
+  }
+
+  .judas-disclosure {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rd-systems-head {
+    margin-top: 42px;
+    padding-top: 22px;
+  }
+
+  .rd-systems-head h3 {
+    font-size: 30px;
+  }
+
+  .rd-system-index a {
+    padding: 22px;
+  }
+}
