@@ -2343,7 +2343,9 @@ footer {
 }
 
 .judas-teaser-image img {
+  object-fit: contain;
   object-position: center center;
+  transform: none;
   filter: saturate(.78) contrast(1.08) brightness(.84);
 }
 
