@@ -321,10 +321,10 @@ export default function Home() {
         <a className="gabriel-teaser judas-teaser" href="#judas-preview" aria-label="Expand JUDAS FIELD Research Preview">
           <div className="gabriel-teaser-image judas-teaser-image">
             <img
-              src="/judas-field-hero.svg"
+              src="/judas-field-hero.webp"
               alt="JUDAS FIELD - real-world Physical AI validation research preview"
-              width="1200"
-              height="800"
+              width="1672"
+              height="941"
             />
             <div className="gabriel-teaser-image-label">
               <span>R&amp;D / 02</span>
