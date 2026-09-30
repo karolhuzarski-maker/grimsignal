@@ -32,6 +32,12 @@ const staticAssets = [
   "gsl-field-close.webp",
 ];
 
+const restoredAssets = [
+  "judas-field-hero.webp",
+];
+
+const referencedAssets = [...staticAssets, ...restoredAssets];
+
 async function restoreBase64Asset(partsRelativePath, outputName, minimumBytes = 1) {
   const partsDirectory = path.join(projectRoot, partsRelativePath);
   const parts = (await readdir(partsDirectory))
@@ -61,7 +67,7 @@ function rewriteAssetReferences(html, assetPrefix) {
     productionUrl,
   );
 
-  for (const asset of staticAssets) {
+  for (const asset of referencedAssets) {
     rewritten = rewritten
       .replaceAll(`src="/${asset}"`, `src="${assetPrefix}${asset}"`)
       .replaceAll(`href="/${asset}"`, `href="${assetPrefix}${asset}"`);
@@ -150,6 +156,11 @@ for (const asset of staticAssets) {
 
 // GitHub connector binary writes can be truncated. Rebuild the field video from
 // text-safe base64 chunks during CI, then overwrite the public fallback copy.
+await restoreBase64Asset(
+  "asset-parts/judas-field-final",
+  "judas-field-hero.webp",
+  80000,
+);
 await restoreBase64Asset("asset-parts/video48", "gsl-field-sample.mp4", 45000);
 
 await writeFile(path.join(outputDirectory, ".nojekyll"), "");
