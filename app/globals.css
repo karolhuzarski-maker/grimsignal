@@ -2326,7 +2326,6 @@ footer {
 }
 
 .judas-teaser {
-  grid-template-columns: minmax(0, 1fr);
   margin-top: 18px;
   border-color: rgba(197,34,46,.32);
   background:
@@ -2444,4 +2443,20 @@ footer {
   .rd-system-index a {
     padding: 22px;
   }
+}
+
+/* Preserve complete artwork beside each research system description. */
+.gabriel-teaser-image {
+  align-self: center;
+  min-height: 0;
+  max-height: none;
+  height: auto;
+}
+
+.gabriel-teaser-image img {
+  min-height: 0;
+  max-height: none;
+  height: auto;
+  object-fit: contain;
+  transform: none;
 }
