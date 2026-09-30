@@ -21,7 +21,7 @@ const staticAssets = [
   "gsl-mci-multiview-01.webp",
   "gsl-capabilities-thermal.webp",
   "gabriel-one-hero.webp",
-  "judas-field-hero.webp",
+  "judas-field-portrait.webp",
   "og.png",
   "favicon.svg",
   "script.js",
