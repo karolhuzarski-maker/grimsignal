@@ -2326,6 +2326,7 @@ footer {
 }
 
 .judas-teaser {
+  grid-template-columns: minmax(0, 1fr);
   margin-top: 18px;
   border-color: rgba(197,34,46,.32);
   background:
@@ -2339,10 +2340,16 @@ footer {
 }
 
 .judas-teaser-image {
+  min-height: 0;
+  max-height: none;
+  height: auto;
   background: #17130f;
 }
 
 .judas-teaser-image img {
+  min-height: 0;
+  max-height: none;
+  height: auto;
   object-fit: contain;
   object-position: center center;
   transform: none;
